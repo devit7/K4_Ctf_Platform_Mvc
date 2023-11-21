@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/font.css" />
+    <link rel="stylesheet" href="../css/team_register.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+  </head>
+  <body>
+    <div>
+      <nav class="navbar">
+        <a href="../index.html" class="logo">
+          <img src="https://iili.io/J27Kips.png" alt="" />
+          <span class="">K4-CTF</span>
+        </a>
+        <ul class="nav-clean">
+          <li><a href="./rule.html">Rule</a></li>
+          <li><a href="./users.html">Users</a></li>
+          <li><a href="./teams.html">Teams</a></li>
+          <li><a href="./scoreboard.html">Scoreboard</a></li>
+          <li><a href="./challenges.html">Challenges</a></li>
+        </ul>
+        <div class="login-button">
+          <a href="./login.html">
+            <span>Login kuy &rarr;</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+    <div class="main-content">
+      <div class="ngotak">
+        <!-- Button Create -->
+        <div id="create-button" class="kotak">
+          <a href="#"><h2>Create Team</h2></a>
+        </div>
+        <!-- Modals Crerate Teams -->
+        <div id="modal-create" class="main-modal">
+          <div class="modal-helper">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1>Create Team</h1>
+              </div>
+              <div class="modal-body">
+                <label for="teamname">Team Name</label>
+                <input id="teamname" type="text">
+                <label for="teampass">Team Password</label>
+                <input id="teampass" type="text">
+              </div>
+              <div class="modal-footer">
+                <button class="bt-create">+ Create</button>
+                <button class="bt-cancel" id="close-modal-create">X Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End modal -->
+
+        <div class="kotak">
+          <a href=""><h2>Join Team</h2></a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let button_create = document.getElementById('create-button');
+      let close_modal_create = document.getElementById('close-modal-create');
+      let modal_creeate = document.getElementById('modal-create');
+
+      button_create.addEventListener('click',()=>{
+        modal_creeate.style.display='flex';
+      });
+
+      close_modal_create.addEventListener('click',() => {
+        modal_creeate.style.display='none';
+      });
+
+
+    </script>
+  </body>
+</html>

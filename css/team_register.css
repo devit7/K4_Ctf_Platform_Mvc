@@ -1,0 +1,135 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(17 24 39 ); 
+    font-family: 'Unifont','Fira Code',monospace;
+    height: 100vh;
+}
+
+a{
+    text-decoration: none;
+}
+
+.main-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ngotak{
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 60%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.main-content a{
+    color: rgb(190 242 100 );
+}
+
+.kotak{
+    background-color:rgb(51 85 0 ); 
+    cursor: pointer;
+    border: 1px solid rgb(190 242 100 );
+    border-radius: 5px;
+    width: 48%;
+    padding: 5px 0;
+}
+
+.kotak:hover{
+    background-color: rgb(190 242 100 );
+    border: 1px solid rgb(51 85 0 );
+}
+
+.kotak a:hover{
+    color: rgb(51 85 0 );
+}
+
+.main-modal{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.modal-helper {
+    position: relative;
+    padding: 1rem;
+    width: 100%;
+    max-width: 672px;
+    height: 100%;
+  }
+  
+  .modal-content {
+    margin-top: 100px;
+    position: relative;
+    padding: 1rem 10%;
+    background-color: rgb(31 41 55);
+    border-radius: 5px;
+    color: rgb(217 249 157 );
+  }
+
+  .modal-header{
+    border-bottom: 1px solid rgb(217 249 157 );
+    padding: 1rem;
+  }
+
+  .modal-body{
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(217 249 157 );
+  }
+
+  .modal-body label{
+    margin-bottom: 5px;
+  }
+
+  .modal-body input{
+    margin-bottom: 8px;
+    padding: 0.4rem 0.5rem;
+    color: rgb(217 249 157 );
+    background-color: rgb(31 41 55);
+    border-radius: 3px;
+    border: 2px solid rgb(51 85 0 );
+  }
+
+  .modal-footer{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  .bt-create{
+    border-radius: 2px;
+    padding: 0.3rem 1.5rem;
+    background-color: rgb(51 85 0 ); 
+    border: 1px solid rgb(190 242 100 );
+    color: rgb(190 242 100 );
+    font-weight: bold;
+  }
+
+  .bt-cancel{
+    border-radius: 2px;
+    padding: 0.3rem 1.5rem;
+    border: 1px solid #fca5a5;
+    background-color: #450a0a;
+    color: #fca5a5;
+    font-weight: bold;
+  }
