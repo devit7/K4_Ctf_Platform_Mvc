@@ -1,6 +1,9 @@
 <?php
 
-class User {
+require('../koneksi/koneksi.php');
+
+class Users {
+
     private $id_user;
     private $nama;
     private $provinsi;
@@ -8,8 +11,10 @@ class User {
     private $email;
     private $username;
     private $password;
+    private $koneksi;
 
-    function __construct( $id_user, $nama, $provinsi, $kampus, $email, $username, $password){
+    public function __construct( $id_user, $nama, $provinsi, $kampus, $email, $username, $password){
+        $this->koneksi = new connect();
         $this->id_user = $id_user;
         $this->nama = $nama;
         $this->provinsi = $provinsi;
@@ -17,7 +22,6 @@ class User {
         $this->email = $email;
         $this->username = $username;
         $this->password = $password;
-
     }
     public function get_Iduser(){
         return $this->id_user;
@@ -64,22 +68,31 @@ class User {
     }
 
 
+    function simpanDB(){
+        try{
+        $sql = "INSERT INTO users (id, user_id, nama, provinsi, kampus, email, username, password) 
+        VALUES (NULL, '$this->id_user', '$this->nama', '$this->provinsi', '$this->kampus', '$this->email', '$this->username', '$this->password')";
+        $this->koneksi->conn->exec($sql);
+        echo "New record created successfully";
+        }catch(PDOException $e){
+            echo $sql . "<br>" . $e->getMessage();
+        }
+    }
+
+
 }
 
-$user = new User(1, "Rizky", "Jawa Barat", "Universitas Komputer Indonesia", "dev@gmail.com", "dev", "dev");
-
-$user->setterNama("Devit");
 
 
-echo "Id User: " . $user->get_Iduser() . "<br>";
-echo "Nama: " . $user->getterNama() . "<br>";
-echo "Provinsi: " . $user->getProvinsi() . "<br>";
-echo "Kampus: " . $user->getKampus() . "<br>";
-echo "Email: " . $user->getEmail() . "<br>";
-echo "Username: " . $user->getUsername() . "<br>";
-echo "Password: " . $user->getPassword() . "<br>";
+if(isset($_POST['submit'])){
+    $user = new Users(2, $_POST['nama'], $_POST['provinsi'], $_POST['kampus'], $_POST['email'], $_POST['username'], $_POST['password']);
+    $user->simpanDB();  
+    echo "berhasil"; 
+}else{
+    echo "gagal";
+}
 
-var_dump($user);
+
 
 
 ?>

@@ -10,24 +10,26 @@
   </head>
   <body>
     <div>
-      <nav class="navbar">
-        <a href="../index.html" class="logo">
-          <img src="https://iili.io/J27Kips.png" alt="" />
-          <span class="">K4-CTF</span>
-        </a>
-        <ul class="nav-clean">
-          <li><a href="./rule.html">Rule</a></li>
-          <li><a href="./users.html">Users</a></li>
-          <li><a href="./teams.html">Teams</a></li>
-          <li><a href="./scoreboard.html">Scoreboard</a></li>
-          <li><a href="./challenges.html">Challenges</a></li>
+      <nav class="navbar ">
+        <a href="/"  class="logo">
+            <img  src="https://iili.io/J27Kips.png" alt="">
+           <span class="" >K4-CTF</span>
+         </a>
+
+        <ul class="nav-clean ">
+            <li><a href="/rule">Rule</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/scoreboard">Scoreboard</a></li>
+            <li><a href="/challenges">Challenges</a></li>
         </ul>
+
         <div class="login-button">
-          <a href="./login.html">
-            <span>Login kuy &rarr;</span>
-          </a>
+            <a href="/login">
+                <span  >Login kuy &rarr;</span>
+            </a>
         </div>
-      </nav>
+    </nav>
     </div>
     <div class="main-content">
       <div class="ngotak">
@@ -42,14 +44,16 @@
               <div class="modal-header">
                 <h1>Create Team</h1>
               </div>
+              <form action="">
               <div class="modal-body">
                 <label for="teamname">Team Name</label>
                 <input id="teamname" type="text">
                 <label for="teampass">Team Password</label>
-                <input id="teampass" type="text">
+                <input id="teampass" type="password">
               </div>
               <div class="modal-footer">
                 <button class="bt-create">+ Create</button>
+              </form>
                 <button class="bt-cancel" id="close-modal-create">X Cancel</button>
               </div>
             </div>
@@ -57,9 +61,32 @@
         </div>
         <!-- End modal -->
 
-        <div class="kotak">
-          <a href=""><h2>Join Team</h2></a>
+        <div  id="join-button" class="kotak">
+          <a href="#"><h2>Join Team</h2></a>
         </div>
+        <!-- Modals Crerate Teams -->
+        <div id="modal-join" class="main-modal">
+          <div class="modal-helper">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1>Join Team</h1>
+              </div>
+              <form action="">
+              <div class="modal-body">
+                <label for="teamname">Team Name</label>
+                <input id="teamname" type="text">
+                <label for="teampass">Team Password</label>
+                <input id="teampass" type="password">
+              </div>
+              <div class="modal-footer">
+                <button class="bt-create">+ Create</button>
+              </form>
+                <button class="bt-cancel" id="close-modal-join">X Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End modal -->
       </div>
     </div>
 
@@ -67,6 +94,17 @@
       let button_create = document.getElementById('create-button');
       let close_modal_create = document.getElementById('close-modal-create');
       let modal_creeate = document.getElementById('modal-create');
+      let button_join = document.getElementById('join-button');
+      let close_modal_join = document.getElementById('close-modal-join');
+      let modal_join = document.getElementById('modal-join');
+
+      button_join.addEventListener('click',()=>{
+        modal_join.style.display='flex';
+      });
+
+      close_modal_join.addEventListener('click',() => {
+        modal_join.style.display='none';
+      });
 
       button_create.addEventListener('click',()=>{
         modal_creeate.style.display='flex';
@@ -75,7 +113,6 @@
       close_modal_create.addEventListener('click',() => {
         modal_creeate.style.display='none';
       });
-
 
     </script>
   </body>

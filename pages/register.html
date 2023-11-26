@@ -10,28 +10,30 @@
 </head>
 <body>
     <!-- Navbar -->
-        <nav class="navbar ">
-            <a href="../index.html"  class="logo">
-                <img  src="https://iili.io/J27Kips.png" alt="">
-                <span class="" >K4-CTF</span>
+    <nav class="navbar ">
+        <a href="/"  class="logo">
+            <img  src="https://iili.io/J27Kips.png" alt="">
+           <span class="" >K4-CTF</span>
+         </a>
+
+        <ul class="nav-clean ">
+            <li><a href="/rule">Rule</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/scoreboard">Scoreboard</a></li>
+            <li><a href="/challenges">Challenges</a></li>
+        </ul>
+
+        <div class="login-button">
+            <a href="/login">
+                <span  >Login kuy &rarr;</span>
             </a>
-            <ul class="nav-clean ">
-                <li><a href="./rule.html">Rule</a></li>
-                <li><a href="./users.html">Users</a></li>
-                <li><a href="./teams.html">Teams</a></li>
-                <li><a href="./scoreboard.html">Scoreboard</a></li>
-                <li><a href="./challenges.html">Challenges</a></li>
-            </ul>
-            <div class="login-button">
-                <a href="./login.html">
-                    <span  >Login kuy &rarr;</span>
-                </a>
-            </div>
-        </nav>
+        </div>
+    </nav>
     <div class="kotak1">
         <!-- Content KOtak -->
            <div class="main-kontent">
-            <form name="form-register" action="./login.html">
+            <form name="form-register" method="POST" action="../controller/controller_register.php">
                 <div class="judul">
                     <h1>/ FORM REGISTER /</h1>
                 </div>

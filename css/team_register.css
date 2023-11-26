@@ -71,11 +71,14 @@ a{
     width: 100%;
     max-width: 672px;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .modal-content {
-    margin-top: 100px;
     position: relative;
+    width: 100%;
     padding: 1rem 10%;
     background-color: rgb(31 41 55);
     border-radius: 5px;
