@@ -1,0 +1,110 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+}
+
+.main-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.area-atas{
+    color: rgb(217 249 157 );
+    width: 100%;
+    background-color: #18202c;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.area-bawah{
+    width: 100%;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tombol-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.menu{
+    display: flex;
+    align-items: start;
+    margin: 0 10px;
+    padding: 10px 60px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: #18202c;
+    margin-bottom: 5px;
+}
+
+.menu:hover{
+    background-color: #1e3a8a;
+}
+
+.menu a{
+    color: #bfdbfe;
+    font-weight: bold;  
+    text-decoration: none;
+}
+
+.form-area h2{
+    margin-bottom: 20px;
+}
+
+.form-area{
+    width: 100%;
+    max-width: 600px;
+    background-color: rgb(31 41 55);
+    border-radius: 5px;
+    padding: 1rem 3rem;
+    height: 100%;
+    color: rgb(217 249 157 );
+}
+
+.form-group{
+    margin-bottom: 20px;
+    width: 100%;
+
+}
+
+.form-group input{
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid rgb(51 85 0 );
+    background-color: #18202c;
+    color: #bfdbfe;
+}
+
+.form-group label{
+    margin-bottom: 5px;
+}
+
+.bt-save{
+    width: 100%;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid rgb(190 242 100 );
+    background-color: rgb(51 85 0 );
+    color: rgb(190 242 100 );
+    cursor: pointer;
+    transition: 0.3s;
+}

@@ -9,26 +9,9 @@
 </head>
 <body>
     <div>
-        <nav class="navbar ">
-            <a href="/"  class="logo">
-                <img  src="https://iili.io/J27Kips.png" alt="">
-               <span class="" >K4-CTF</span>
-             </a>
-    
-            <ul class="nav-clean ">
-                <li><a href="/rule">Rule</a></li>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/teams">Teams</a></li>
-                <li><a href="/scoreboard">Scoreboard</a></li>
-                <li><a href="/challenges">Challenges</a></li>
-            </ul>
-    
-            <div class="login-button">
-                <a href="/login">
-                    <span  >Login kuy &rarr;</span>
-                </a>
-            </div>
-        </nav>
+    <?php
+    include '../component/navbar.php';
+    ?>
     </div>
 
     <div class="area-utama">

@@ -4,33 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>teams</title>
-    <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/teams.css">
     <link rel="stylesheet" href="../css/font.css">
 </head>
 <body>
     <div class="">
         <!-- Navbar -->
-        <nav class="navbar ">
-            <a href="/"  class="logo">
-                <img  src="https://iili.io/J27Kips.png" alt="">
-               <span class="" >K4-CTF</span>
-             </a>
-    
-            <ul class="nav-clean ">
-                <li><a href="/rule">Rule</a></li>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/teams">Teams</a></li>
-                <li><a href="/scoreboard">Scoreboard</a></li>
-                <li><a href="/challenges">Challenges</a></li>
-            </ul>
-    
-            <div class="login-button">
-                <a href="/login">
-                    <span  >Login kuy &rarr;</span>
-                </a>
-            </div>
-        </nav>
+        <?php
+    include '../component/navbar.php';
+    ?>
     </div>
     <!-- Content -->
     <div class="container-teams">

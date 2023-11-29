@@ -5,37 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/login.css">
-    <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/font.css">
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar ">
-        <a href="/"  class="logo">
-            <img  src="https://iili.io/J27Kips.png" alt="">
-           <span class="" >K4-CTF</span>
-         </a>
-
-        <ul class="nav-clean ">
-            <li><a href="/rule">Rule</a></li>
-            <li><a href="/users">Users</a></li>
-            <li><a href="/teams">Teams</a></li>
-            <li><a href="/scoreboard">Scoreboard</a></li>
-            <li><a href="/challenges">Challenges</a></li>
-        </ul>
-
-        <div class="login-button">
-            <a href="/login">
-                <span  >Login kuy &rarr;</span>
-            </a>
-        </div>
-    </nav>
+    <?php
+    include '../component/navbar.php';
+    ?>
     <!-- Content -->
     <div class="content-utama">
         <div class="form-login">
             <!-- Form login -->
-            <form name="form-login"action="">
+            <form name="form-login" method="POST" action="../controller/controller_login.php">
                 <h2>/ FORM LOGIN /</h2>
                 <hr>
                 <br>
@@ -52,14 +34,14 @@
                 <br>
                 <hr>
                 <br>
-                <button id="login"type="button"  class="login">Login</button>
+                <button id="login"type="submit"  class="login">Login</button>
             </form>
             <a href="/register"><button class="regis">Register</button></a>
         </div>
     </div>
-
-
-    <!-- Script -->
+    <script type="text/javascript" src="../js/login.js"></script>
+<!-- 
+    
     <script>
         
         let form = document.forms['form-login'];
@@ -82,7 +64,7 @@
                 alert('Password atau Username Salah !!');
             }
 
-            /* Ngeluarin Isi Nya :] */
+            //Ngeluarin Isi Nya :] 
             let dataForm = new FormData(document.forms[0]);
 
             let isinya = [...dataForm.entries()];
@@ -97,12 +79,12 @@
                 let value =dataForm.get(keyname);
 
                 console.log(`Data keyname = ${keyname} | Value = ${value}`)
-            }
+            } 
         }
 
         //form.addEventListener('submit',login);
         let logins =document.getElementById('login'); 
         logins.addEventListener('click',login)
-    </script>
+    </script> -->
 </body>
 </html>
