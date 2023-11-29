@@ -25,7 +25,7 @@
             </ul>
     
             <div class="login-button">
-                <a href="/login">
+                <a href="../pages/login.php">
                     <span  >Login kuy &rarr;</span>
                 </a>
             </div>

@@ -108,9 +108,9 @@ class Users
 
     public function getByid($id)
     {
-        $sql = 'SELECT * FROM users WHEN user_id=:id';
-        $stmt = $this->koneksi->conn->query($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $sql = 'SELECT * FROM users WHERE user_id=?';
+        $stmt = $this->koneksi->conn->prepare($sql);
+        $stmt->execute([ $id ]);
         $dataUserId = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $dataUserId;
     }

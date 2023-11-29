@@ -6,6 +6,7 @@
     <title>teams</title>
     <link rel="stylesheet" href="../css/teams.css" />
     <link rel="stylesheet" href="../css/font.css" />
+    <link rel="stylesheet" href="../css/navbar.css">
   </head>
   <body>
     <div class="">

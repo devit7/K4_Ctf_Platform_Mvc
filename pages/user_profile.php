@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/teams.css" />
     <link rel="stylesheet" href="../css/font.css" />
     <link rel="stylesheet" href="../css/user_profile.css" />
+    <link rel="stylesheet" href="../css/navbar.css">
   </head>
   <body>
     <div class="">
@@ -34,16 +35,27 @@
         <div class="form-area">
           <form action="">
             <h2>Profile Setting</h2>
+            <?php
+            include '../model/users.php';
+
+            $users = new Users();
+            $id=1701250995;
+            $dataId = $users->getByid($id);
+            foreach($dataId as $user) :
+            ?>
             <div class="form-group">
               <label for="nama">Nama</label>
-              <input type="text" id="nama" />
+              <input type="text" id="nama" value="<?=$user['nama'] ?>" />
               <label for="provinsi">Provinsi</label>
-              <input type="text" id="provinsi" />
+              <input type="text" id="provinsi" value="<?=$user['provinsi'] ?>" />
               <label for="kampus">Kampus</label>
-              <input type="text" id="kampus" />
+              <input type="text" id="kampus" value="<?=$user['kampus'] ?>" />
               <label for="email">Email</label>
-              <input type="text" id="email" />
+              <input type="text" id="email" value="<?=$user['email'] ?>" />
             </div>
+            <?php
+            endforeach;
+            ?>
             <div class="form-button">
               <button
               class="bt-save"

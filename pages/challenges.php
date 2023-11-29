@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/challenges.css">
     <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body>
     <div class="layar">
