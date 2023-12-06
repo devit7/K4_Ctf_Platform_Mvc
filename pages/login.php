@@ -37,7 +37,7 @@
                 <br>
                 <button id="login"type="submit"  class="login">Login</button>
             </form>
-            <a href="/register"><button class="regis">Register</button></a>
+            <a href="./register.php"><button class="regis">Register</button></a>
         </div>
     </div>
     <script type="text/javascript" src="../js/login.js"></script>

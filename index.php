@@ -1,6 +1,3 @@
 <?php
-require __DIR__ ."../pages/index.php";
-
-
-
+header('Location: pages/login.php');
 ?>

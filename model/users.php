@@ -115,6 +115,21 @@ class Users
         return $dataUserId;
     }
 
+    public function update($id, $nama,$provinsi,$kampus,$email ){
+        try{
+        $sql = 'UPDATE users SET nama=?, provinsi=?, kampus=?, email=? WHERE user_id= ?';
+        $stmt = $this->koneksi->conn->prepare($sql);
+        $query=[$nama,$provinsi,$kampus,$email,$id];
+        if($stmt->execute($query)){
+            echo'Berhasil';
+        }else{
+            echo 'gagal';
+        }
+        }catch (PDOException $e) {
+            echo $sql . '<br>'. $e->getMessage();
+        }
+    }
+
     public function deleteByid($id)
     {
         $sql = 'DELETE FROM users WHEN user_id=:id';
@@ -130,5 +145,13 @@ class Users
             $pesan['status'] = 'gagal terhapus';
             return $pesan;
         }
+    }
+
+    public function authenticate($username, $password){
+        $sql = 'SELECT * FROM users WHERE username=? AND password=?';
+        $stmt = $this->koneksi->conn->prepare($sql);
+        $stmt->execute([$username, $password]);
+        $dataUser = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $dataUser;
     }
 }

@@ -164,7 +164,7 @@
         let idpindah=document.getElementById('link-myteam');
     
         idpindah.addEventListener('click',()=>{
-            window.location.href='/team_register'
+            window.location.href='./team_register.php'
         })
         
         

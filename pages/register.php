@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/font.css">
     <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -61,7 +62,7 @@
                 <br>
                 <button type="submit" name="submit" class="bt-reg">Submit</button>
             </form>
-            <a href="/login"><button class="bt-log">Login</button>
+            <a href="./login.php"><button class="bt-log">Login</button>
             </a>
            </div>
     </div>
