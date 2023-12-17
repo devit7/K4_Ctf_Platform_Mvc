@@ -1,3 +1,6 @@
+<?php
+include('../component/check_sesion.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +40,7 @@
       <div class="form-area">
         <?php include '../model/users.php';
         $users = new Users();
-        $id = 1701250995;
+        $id = 1701854464;
         $dataId = $users->getByid($id);
         foreach ($dataId as $user) :
         ?>

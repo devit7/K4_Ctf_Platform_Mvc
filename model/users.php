@@ -85,14 +85,28 @@ class Users
         $this->password = $password;
     }
 
-
     public function createData()
     {
         try {
+            $sql1= "SELECT username,email FROM users  ";
+            $stmt1= $this->koneksi->conn->query($sql1);
+            $dataUsername = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($dataUsername as $d):
+                if($this->username === $d['username']){
+                    $pesan['pesan']='Username Alredy Exists';
+                    return $pesan;
+                }
+                if($this->email === $d['email']){
+                    $pesan['pesan']='Email Alredy Exists';
+                    return $pesan;
+                }
+            endforeach;
+
             $sql = "INSERT INTO users (id, user_id, nama, provinsi, kampus, email, username, password, team_id, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->koneksi->conn->prepare($sql);
             $statement = $stmt->execute([NULL, $this->id_user, $this->nama, $this->provinsi, $this->kampus, $this->email, $this->username, $this->password, null, 'free']);
-            echo "New record created successfully";
+            return True;
         } catch (PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
         }

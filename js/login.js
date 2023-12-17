@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
             alert(hasil+' ] Kosong Harap Di Lengkapi');
         }
         else{
-            alert('TERIMAKASIH TELAH LOGIN');
             event.defaultPrevented();
         }
         event.preventDefault();

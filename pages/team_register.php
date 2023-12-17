@@ -1,3 +1,6 @@
+<?php
+include('../component/check_sesion.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,9 +33,9 @@
               <form action="">
               <div class="modal-body">
                 <label for="teamname">Team Name</label>
-                <input id="teamname" type="text">
+                <input name="team_name" id="teamname" type="text">
                 <label for="teampass">Team Password</label>
-                <input id="teampass" type="password">
+                <input name="team_pass" id="teampass" type="password">
               </div>
               <div class="modal-footer">
                 <button class="bt-create">+ Create</button>

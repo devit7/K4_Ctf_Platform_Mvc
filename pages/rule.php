@@ -1,3 +1,6 @@
+<?php
+include('../component/check_sesion.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

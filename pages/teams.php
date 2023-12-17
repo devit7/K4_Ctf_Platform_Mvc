@@ -1,3 +1,6 @@
+<?php
+include('../component/check_sesion.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,66 +35,11 @@
                 <table>
                     <tr>
                         <th>Teams</th>
-                        <th>Kampus</th>
-                        <th>Provinsi</th>
+                        <th>Afiliasi</th>
+                        <th>Website</th>
                     </tr>
                     <tr>
                         <td>user1</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user2</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user3</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user1</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user2</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user3</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user1</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user2</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user3</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user1</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user2</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
-                    </tr>
-                    <tr>
-                        <td>user3</td>
                         <td>ITTS</td>
                         <td>Jawa Timur</td>
                     </tr>

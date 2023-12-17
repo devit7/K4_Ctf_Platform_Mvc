@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K4-CTF Platform</title>
     <!-- import css -->
-    <link rel="stylesheet" href="./css/font.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 <body class="">
     <div class="">
         <!-- Navbar -->
         <?php
-        include './component/navbar.php';
+        include '../component/navbar.php';
         ?>
         <!-- Content -->
         <br>

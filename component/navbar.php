@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
     <div class="">
         <!-- Navbar -->
         <nav class="navbar ">
-            <a href="/"  class="logo">
+            <a href="../pages/index.php"  class="logo">
                 <img  src="https://iili.io/J27Kips.png" alt="">
                <span class="" >K4-CTF</span>
              </a>
@@ -23,12 +24,23 @@
                 <li><a href="../pages/scoreboard.php">Scoreboard</a></li>
                 <li><a href="../pages/challenges.php">Challenges</a></li>
             </ul>
-    
-            <div class="login-button">
-                <a href="../pages/login.php">
-                    <span  >Login kuy &rarr;</span>
-                </a>
-            </div>
+
+            <?php if(isset($_SESSION['id_user'])): ?>
+                <div>
+                    <span><?=$_SESSION['id_user'] ?></span>
+                    <div class="login-button">
+                        <a href="../controller/controller_logout.php">
+                            <span  >Logout &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="login-button">
+                    <a href="../pages/login.php">
+                        <span  >Login &rarr;</span>
+                    </a>
+                </div>
+            <?php endif; ?>
         </nav>
     </div>
 </body>

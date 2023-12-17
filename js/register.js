@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
             alert(hasil+' ] Kosong Harap Di Lengkapi')
         }else{
-            alert('TERIMAKASIH TELAH REGISTRASI')
             event.defaultPrevented();
         }
         

@@ -1,9 +1,12 @@
+<?php
+include('../component/check_sesion.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Challeges</title>
     <link rel="stylesheet" href="../css/challenges.css">
     <link rel="stylesheet" href="../css/font.css">
     <link rel="stylesheet" href="../css/navbar.css">
