@@ -144,6 +144,21 @@ class Users
         }
     }
 
+    public function updateIdTeams($id, $id_teams){
+        try{
+        $sql = 'UPDATE users SET team_id=?,role=? WHERE user_id= ?';
+        $stmt = $this->koneksi->conn->prepare($sql);
+        $query=[$id_teams,$id];
+        if($stmt->execute($query)){
+            echo'Berhasil';
+        }else{
+            echo 'gagal';
+        }
+        }catch (PDOException $e) {
+            echo $sql . '<br>'. $e->getMessage();
+        }
+    }
+
     public function deleteByid($id)
     {
         $sql = 'DELETE FROM users WHEN user_id=:id';
@@ -151,7 +166,6 @@ class Users
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         // check status
-
         if ($stmt->execute()) {
             $pesan['status'] = 'Berhasil Terhapus';
             return $pesan;

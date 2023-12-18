@@ -9,6 +9,7 @@ include('../component/check_sesion.php');
     <title>Document</title>
     <link rel="stylesheet" href="../css/font.css">
     <link rel="stylesheet" href="../css/rule.css">
+    <link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body>
     <div>

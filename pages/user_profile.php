@@ -40,7 +40,7 @@ include('../component/check_sesion.php');
       <div class="form-area">
         <?php include '../model/users.php';
         $users = new Users();
-        $id = 1701854464;
+        $id = $_SESSION['id_user'];
         $dataId = $users->getByid($id);
         foreach ($dataId as $user) :
         ?>

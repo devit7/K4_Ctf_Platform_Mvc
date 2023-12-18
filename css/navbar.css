@@ -62,3 +62,16 @@ a{
     font-weight: bold;
     cursor: pointer;
 }
+
+.nav-log{
+    display: flex;
+    flex-direction: row;
+}
+
+.us{
+    display: flex;
+    color: rgb(217 249 157 );
+    padding: 0 1rem;
+    text-align: center;
+    align-items: center;
+}
