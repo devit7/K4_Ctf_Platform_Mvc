@@ -1,6 +1,6 @@
 <?php
 
-require('../koneksi/koneksi.php');
+require_once('../koneksi/koneksi.php');
 
 class Users
 {
@@ -144,11 +144,11 @@ class Users
         }
     }
 
-    public function updateIdTeams($id, $id_teams){
+    public function updateIdTeams($id, $id_teams,$role){
         try{
         $sql = 'UPDATE users SET team_id=?,role=? WHERE user_id= ?';
         $stmt = $this->koneksi->conn->prepare($sql);
-        $query=[$id_teams,$id];
+        $query=[$id_teams,$role,$id];
         if($stmt->execute($query)){
             echo'Berhasil';
         }else{

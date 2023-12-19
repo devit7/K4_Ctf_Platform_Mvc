@@ -1,6 +1,6 @@
 <?php
 
-require('../koneksi/koneksi.php');
+require_once('../koneksi/koneksi.php');
 
 class Teams
 {
@@ -73,19 +73,20 @@ class Teams
         return $dataTeams;
     }
 
-    public function createData(){
+    public function createNewTeam($team_name,$team_pass){
         try{
-            $sql1= "SELECT nama_teams FROM teams WHERE nama_teams='$this->nama_teams' ";
+            $sql1= "SELECT nama_team FROM teams WHERE nama_team='$team_name' ";
             $stmt1= $this->koneksi->conn->query($sql1);
             $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
             if(count($dataNamaTeams)>0){
                 $pesan['pesan'] = "Nama Teams sudah terdaftar";
                 return $pesan;
             }else{
-                $sql = "INSERT INTO teams (nama_teams,pass_teams,afiliasi,website) VALUES (?, ?, ?, ?)";
+                $sql = "INSERT INTO teams (team_id,nama_team,pass_team,afiliasi,website) VALUES (?,?, ?, ?, ?)";
                 $stmt = $this->koneksi->conn->prepare($sql);
-                $stmt->execute([$this->nama_teams,$this->pass_teams,$this->afiliasi,$this->website]);
-                return "1";
+                $id_teams=time();
+                $stmt->execute([$id_teams,$team_name,$team_pass,null,null]);
+                return $id_teams;
             }
         }catch(PDOException $e){
             return $e->getMessage();

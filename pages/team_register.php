@@ -30,7 +30,7 @@ include('../component/check_sesion.php');
               <div class="modal-header">
                 <h1>Create Team</h1>
               </div>
-              <form action="">
+              <form method="POST" action="../controller/controller_create_team.php">
               <div class="modal-body">
                 <label for="teamname">Team Name</label>
                 <input name="team_name" id="teamname" type="text">
@@ -38,7 +38,7 @@ include('../component/check_sesion.php');
                 <input name="team_pass" id="teampass" type="password">
               </div>
               <div class="modal-footer">
-                <button class="bt-create">+ Create</button>
+                <button type="submit" class="bt-create">+ Create</button>
               </form>
                 <button type="button" class="bt-cancel" id="close-modal-create">X Cancel</button>
               </div>
