@@ -51,7 +51,7 @@ a{
     color: rgb(51 85 0 );
 }
 
-.main-modal{
+.main-modal1{
     display: none;
     justify-content: center;
     align-items: center;
@@ -65,7 +65,7 @@ a{
     overflow-x: hidden;
 }
 
-.modal-helper {
+.modal-helper1 {
     position: relative;
     padding: 1rem;
     width: 100%;
@@ -76,7 +76,7 @@ a{
     align-items: center;
   }
   
-  .modal-content {
+  .modal-content1 {
     position: relative;
     width: 100%;
     padding: 1rem 10%;
@@ -85,12 +85,12 @@ a{
     color: rgb(217 249 157 );
   }
 
-  .modal-header{
+  .modal-header1{
     border-bottom: 1px solid rgb(217 249 157 );
     padding: 1rem;
   }
 
-  .modal-body{
+  .modal-body1{
     font-weight: bold;
     display: flex;
     flex-direction: column;
@@ -99,11 +99,11 @@ a{
     border-bottom: 1px solid rgb(217 249 157 );
   }
 
-  .modal-body label{
+  .modal-body1 label{
     margin-bottom: 5px;
   }
 
-  .modal-body input{
+  .modal-body1 input{
     margin-bottom: 8px;
     padding: 0.4rem 0.5rem;
     color: rgb(217 249 157 );
@@ -112,14 +112,14 @@ a{
     border: 2px solid rgb(51 85 0 );
   }
 
-  .modal-footer{
+  .modal-footer1{
     padding: 1rem;
     display: flex;
     justify-content: space-between;
 
   }
 
-  .bt-create{
+  .bt-create1{
     border-radius: 2px;
     padding: 0.3rem 1.5rem;
     background-color: rgb(51 85 0 ); 
@@ -128,7 +128,7 @@ a{
     font-weight: bold;
   }
 
-  .bt-cancel{
+  .bt-cancel1{
     border-radius: 2px;
     padding: 0.3rem 1.5rem;
     border: 1px solid #fca5a5;

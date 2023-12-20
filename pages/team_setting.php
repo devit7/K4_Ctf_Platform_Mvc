@@ -28,29 +28,44 @@ include('../component/check_sesion.php');
       </h1>
     </div>
     <div class="main-kotak">
-      <div>
+      <div class="area-kiri">
+        <div class="menu">
+          <a href=""> List Member </a>
+        </div>
+        <div class="menu">
+          <a href=""> Invite Member </a>
+        </div>
+        <div class="menu">
+          <a href=""> Delete Team </a>
+        </div>
+      </div>
+      <div class="area-kanan">
+        <h2>
+          List Member
+        </h2>
+        <br>
         <table>
           <tr>
+            <th>No</th>
             <th>Member</th>
-            <th>Score</th>
+            <th>Role</th>
           </tr>
-          <tr>
-            <td>Member 1</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>Member 2</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>Member 3</td>
-            <td>300</td>
-          </tr>
+          <?php
+          include '../model/teams.php';
+          $no=1;
+          $teams = new Teams();
+          $dataTeams = $teams->listTeambyUser($_SESSION['id_user']);
+          foreach ($dataTeams as $team) :
+          ?>
+            <tr>
+              <td><?= $no++ ?></td>
+              <td><?= $team['nama'] ?></td>
+              <td><?= $team['role'] ?></td>
+            </tr>
+          <?php
+          endforeach;
+          ?>
         </table>
-      </div>
-      <div>
-        <button>Setting</button>
-        <button>Invite Member</button>
       </div>
     </div>
   </div>

@@ -259,9 +259,16 @@ include('../component/check_sesion.php');
                     </div>
                 </div>
             </div>
-            <div class="Myteam">
+            <div id="link-myteam" class="Myteam">
                     <h1>My Team</h1>
             </div>
         </div>
+        <script>
+            let idpindah=document.getElementById('link-myteam');
+    
+            idpindah.addEventListener('click',()=>{
+                window.location.href='./team_register.php'
+            })
+        </script>
 </body>
 </html>

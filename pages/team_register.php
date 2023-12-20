@@ -24,23 +24,23 @@ include_once('../component/check_team.php');
           <a href="#"><h2>Create Team</h2></a>
         </div>
         <!-- Modals Crerate Teams -->
-        <div id="modal-create" class="main-modal">
-          <div class="modal-helper">
-            <div class="modal-content">
-              <div class="modal-header">
+        <div id="modal-create" class="main-modal1">
+          <div class="modal-helper1">
+            <div class="modal-content1">
+              <div class="modal-header1">
                 <h1>Create Team</h1>
               </div>
               <form method="POST" action="../controller/controller_create_team.php">
-              <div class="modal-body">
+              <div class="modal-body1">
                 <label for="teamname">Team Name</label>
                 <input name="team_name" id="teamname" type="text">
                 <label for="teampass">Team Password</label>
                 <input name="team_pass" id="teampass" type="password">
               </div>
-              <div class="modal-footer">
-                <button type="submit" class="bt-create">+ Create</button>
+              <div class="modal-footer1">
+                <button type="submit" class="bt-create1">+ Create</button>
               </form>
-                <button type="button" class="bt-cancel" id="close-modal-create">X Cancel</button>
+                <button type="button" class="bt-cancel1" id="close-modal-create">X Cancel</button>
               </div>
             </div>
           </div>
@@ -51,23 +51,23 @@ include_once('../component/check_team.php');
           <a href="#"><h2>Join Team</h2></a>
         </div>
         <!-- Modals Crerate Teams -->
-        <div id="modal-join1" class="main-modal">
-          <div class="modal-helper">
-            <div class="modal-content">
-              <div class="modal-header">
+        <div id="modal-join1" class="main-modal1">
+          <div class="modal-helper1">
+            <div class="modal-content1">
+              <div class="modal-header1">
                 <h1>Join Team</h1>
               </div>
               <form method="post" action="../controller/controller_join_team.php">
-              <div class="modal-body">
+              <div class="modal-body1">
                 <label for="teamname">Team Name</label>
                 <input id="teamname" name="team_name" type="text">
                 <label for="teampass">Team Password</label>
                 <input id="teampass" name="team_pass" type="password">
               </div>
-              <div class="modal-footer">
-                <button type="submit" class="bt-create">+ Join</button>
+              <div class="modal-footer1">
+                <button type="submit" class="bt-create1">+ Join</button>
               </form>
-                <button type="button" class="bt-cancel" id="close-modal-join1">X Cancel</button>
+                <button type="button" class="bt-cancel1" id="close-modal-join1">X Cancel</button>
               </div>
             </div>
           </div>
@@ -116,13 +116,13 @@ include_once('../component/check_team.php');
         let close_modal_join = document.getElementById('close-modal-join');
         let modal_join = document.getElementById('modal-join');
 
-        if (status === 'Nama Teams atau Password salah' ) {
+        if (status === 'Nama Teams atau Password salah' ||"Nama Teams sudah terdaftar" ) {
             modal_join.style.display = 'flex';
         }
 
         close_modal_join.addEventListener('click', () => {
             modal_join.style.display = 'none';
-            if (status === 'Nama Teams atau Password salah') {
+            if (status === 'Nama Teams atau Password salah' || status === 'Nama Teams sudah terdaftar') {
                 url.searchParams.delete('status');
                 history.replaceState({}, document.title, url.href); //untuk menghilangkan status di url
             }

@@ -17,3 +17,69 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+.main-kotak{
+    width: 100%;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.area-kiri{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    top: 0;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.area-kanan{
+    width: 100%;
+    max-width: 600px;
+    background-color: rgb(31 41 55);
+    border-radius: 5px;
+    padding: 1rem 3rem;
+    height: 100%;
+    color: rgb(217 249 157 );
+}
+
+
+table{
+    text-align: left;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+table tr th{
+    color: rgb(217 249 157 );
+    padding: 10px 0;
+}
+
+table tr td{
+    color: rgb(217 249 157 );
+    padding: 10px 0;
+}
+
+.menu{
+    display: flex;
+    align-items: start;
+    margin: 0 10px;
+    padding: 10px 60px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: #18202c;
+    margin-bottom: 5px;
+}
+.menu:hover{
+    background-color: #1e3a8a;
+}
+
+.menu a{
+    color: #bfdbfe;
+    font-weight: bold;  
+    text-decoration: none;
+}
+

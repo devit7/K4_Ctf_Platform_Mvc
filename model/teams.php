@@ -97,15 +97,15 @@ class Teams
         }
     }
 
-    public function joinTeam($team_name,$team_pass){
+    public function joinTeam($team_name,$team_pass,$id_user){
         try{
-            $sql1= "SELECT nama_team,pass_team FROM teams WHERE nama_team='$team_name' AND pass_team='$team_pass'";
+            $sql1= "SELECT * FROM teams WHERE nama_team='$team_name' AND pass_team='$team_pass'";
             $stmt1= $this->koneksi->conn->query($sql1);
             $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
             if(count($dataNamaTeams)>0){
                 $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
                 $stmt2 = $this->koneksi->conn->prepare($sql2);
-                $stmt2->execute([$_SESSION['user_id'],$dataNamaTeams[0]['team_id'],'member']);
+                $stmt2->execute([$id_user,$dataNamaTeams[0]['team_id'],'member']);
                 return $dataNamaTeams[0]['team_id'];
             }else{
                 $pesan['pesan'] = "Nama Teams atau Password salah";
@@ -130,8 +130,8 @@ class Teams
 
     public function listTeambyUser($id_user){
         try{
-            $sql="SELECT * FROM user_team WHERE team_id IN (SELECT team_id FROM user_team WHERE user_id = ?)";
-            $stmt = $this->koneksi->conn->query($sql);
+            $sql="SELECT u.nama, ut.role FROM users AS u JOIN user_team AS ut ON u.user_id = ut.user_id WHERE ut.team_id IN (SELECT team_id FROM user_team WHERE user_id = ?) ";
+            $stmt = $this->koneksi->conn->prepare($sql);
             $stmt->execute([$id_user]);
             $dataTeams = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $dataTeams;
