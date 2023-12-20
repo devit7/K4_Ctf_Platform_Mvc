@@ -38,11 +38,20 @@ include('../component/check_sesion.php');
                         <th>Afiliasi</th>
                         <th>Website</th>
                     </tr>
+                    <?php
+                    include '../model/teams.php';
+                    $teams = new Teams();
+                    $dataTeams=$teams->getAll();
+                    foreach ($dataTeams as $team):
+                    ?>
                     <tr>
-                        <td>user1</td>
-                        <td>ITTS</td>
-                        <td>Jawa Timur</td>
+                        <td><?=$team['nama_team']?></td>
+                        <td><?=$team['afiliasi']?></td>
+                        <td><?=$team['website']?></td>
                     </tr>
+                    <?php
+                    endforeach;
+                    ?>
                 </table>
             </div>
         </div>

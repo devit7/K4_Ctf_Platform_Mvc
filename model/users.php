@@ -103,9 +103,9 @@ class Users
                 }
             endforeach;
 
-            $sql = "INSERT INTO users (id, user_id, nama, provinsi, kampus, email, username, password, team_id, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO users (id, user_id, nama, provinsi, kampus, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->koneksi->conn->prepare($sql);
-            $statement = $stmt->execute([NULL, $this->id_user, $this->nama, $this->provinsi, $this->kampus, $this->email, $this->username, $this->password, null, 'free']);
+            $statement = $stmt->execute([NULL, $this->id_user, $this->nama, $this->provinsi, $this->kampus, $this->email, $this->username, $this->password]);
             return True;
         } catch (PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
@@ -144,20 +144,6 @@ class Users
         }
     }
 
-    public function updateIdTeams($id, $id_teams,$role){
-        try{
-        $sql = 'UPDATE users SET team_id=?,role=? WHERE user_id= ?';
-        $stmt = $this->koneksi->conn->prepare($sql);
-        $query=[$id_teams,$role,$id];
-        if($stmt->execute($query)){
-            echo'Berhasil';
-        }else{
-            echo 'gagal';
-        }
-        }catch (PDOException $e) {
-            echo $sql . '<br>'. $e->getMessage();
-        }
-    }
 
     public function deleteByid($id)
     {
@@ -173,6 +159,14 @@ class Users
             $pesan['status'] = 'gagal terhapus';
             return $pesan;
         }
+    }
+
+    public function checkHaveATeam($id){
+        $sql = 'SELECT * FROM user_team WHERE user_id=? AND team_id IS NOT NULL';
+        $stmt = $this->koneksi->conn->prepare($sql);
+        $stmt->execute([$id]);
+        $dataUser = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $dataUser;
     }
 
     public function authenticate($username, $password){

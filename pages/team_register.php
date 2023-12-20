@@ -1,5 +1,5 @@
 <?php
-include('../component/check_sesion.php');
+include_once('../component/check_team.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,29 +51,38 @@ include('../component/check_sesion.php');
           <a href="#"><h2>Join Team</h2></a>
         </div>
         <!-- Modals Crerate Teams -->
-        <div id="modal-join" class="main-modal">
+        <div id="modal-join1" class="main-modal">
           <div class="modal-helper">
             <div class="modal-content">
               <div class="modal-header">
                 <h1>Join Team</h1>
               </div>
-              <form action="">
+              <form method="post" action="../controller/controller_join_team.php">
               <div class="modal-body">
                 <label for="teamname">Team Name</label>
-                <input id="teamname" type="text">
+                <input id="teamname" name="team_name" type="text">
                 <label for="teampass">Team Password</label>
-                <input id="teampass" type="password">
+                <input id="teampass" name="team_pass" type="password">
               </div>
               <div class="modal-footer">
-                <button class="bt-create">+ Create</button>
+                <button type="submit" class="bt-create">+ Join</button>
               </form>
-                <button type="button" class="bt-cancel" id="close-modal-join">X Cancel</button>
+                <button type="button" class="bt-cancel" id="close-modal-join1">X Cancel</button>
               </div>
             </div>
           </div>
         </div>
         <!-- End modal -->
       </div>
+      <?php
+        include_once '../component/modals.php';
+
+        if (isset($_GET['status'])) {
+          $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
+          createModal('Register Failed', $pesan);
+      }
+
+      ?>
     </div>
 
     <script>
@@ -81,15 +90,15 @@ include('../component/check_sesion.php');
       let close_modal_create = document.getElementById('close-modal-create');
       let modal_creeate = document.getElementById('modal-create');
       let button_join = document.getElementById('join-button');
-      let close_modal_join = document.getElementById('close-modal-join');
-      let modal_join = document.getElementById('modal-join');
+      let close_modal_join1 = document.getElementById('close-modal-join1');
+      let modal_join1 = document.getElementById('modal-join1');
 
       button_join.addEventListener('click',()=>{
-        modal_join.style.display='flex';
+        modal_join1.style.display='flex';
       });
 
-      close_modal_join.addEventListener('click',() => {
-        modal_join.style.display='none';
+      close_modal_join1.addEventListener('click',() => {
+        modal_join1.style.display='none';
       });
 
       button_create.addEventListener('click',()=>{
@@ -100,6 +109,24 @@ include('../component/check_sesion.php');
         modal_creeate.style.display='none';
       });
 
+      //get query url
+       let url = new URL(window.location.href);
+        let status = url.searchParams.get('status');
+
+        let close_modal_join = document.getElementById('close-modal-join');
+        let modal_join = document.getElementById('modal-join');
+
+        if (status === 'Nama Teams atau Password salah' ) {
+            modal_join.style.display = 'flex';
+        }
+
+        close_modal_join.addEventListener('click', () => {
+            modal_join.style.display = 'none';
+            if (status === 'Nama Teams atau Password salah') {
+                url.searchParams.delete('status');
+                history.replaceState({}, document.title, url.href); //untuk menghilangkan status di url
+            }
+        }); 
     </script>
   </body>
 </html>

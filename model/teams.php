@@ -73,7 +73,7 @@ class Teams
         return $dataTeams;
     }
 
-    public function createNewTeam($team_name,$team_pass){
+    public function createNewTeam($team_name,$team_pass,$id_user){
         try{
             $sql1= "SELECT nama_team FROM teams WHERE nama_team='$team_name' ";
             $stmt1= $this->koneksi->conn->query($sql1);
@@ -86,8 +86,55 @@ class Teams
                 $stmt = $this->koneksi->conn->prepare($sql);
                 $id_teams=time();
                 $stmt->execute([$id_teams,$team_name,$team_pass,null,null]);
+                //table user_team insert
+                $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
+                $stmt2 = $this->koneksi->conn->prepare($sql2);
+                $stmt2->execute([$id_user,$id_teams,'lead']);
                 return $id_teams;
             }
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function joinTeam($team_name,$team_pass){
+        try{
+            $sql1= "SELECT nama_team,pass_team FROM teams WHERE nama_team='$team_name' AND pass_team='$team_pass'";
+            $stmt1= $this->koneksi->conn->query($sql1);
+            $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+            if(count($dataNamaTeams)>0){
+                $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
+                $stmt2 = $this->koneksi->conn->prepare($sql2);
+                $stmt2->execute([$_SESSION['user_id'],$dataNamaTeams[0]['team_id'],'member']);
+                return $dataNamaTeams[0]['team_id'];
+            }else{
+                $pesan['pesan'] = "Nama Teams atau Password salah";
+                return $pesan;
+            }
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function listTeambyIdUser($id_user){
+        try{
+            $sql = "SELECT * FROM teams WHERE team_id IN (SELECT team_id FROM users WHERE user_id=?)";
+            $stmt = $this->koneksi->conn->query($sql);
+            $stmt->execute([$id_user]);
+            $dataTeams = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $dataTeams;
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function listTeambyUser($id_user){
+        try{
+            $sql="SELECT * FROM user_team WHERE team_id IN (SELECT team_id FROM user_team WHERE user_id = ?)";
+            $stmt = $this->koneksi->conn->query($sql);
+            $stmt->execute([$id_user]);
+            $dataTeams = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $dataTeams;
         }catch(PDOException $e){
             return $e->getMessage();
         }
