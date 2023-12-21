@@ -118,8 +118,8 @@ class Teams
 
     public function listTeambyIdUser($id_user){
         try{
-            $sql = "SELECT * FROM teams WHERE team_id IN (SELECT team_id FROM users WHERE user_id=?)";
-            $stmt = $this->koneksi->conn->query($sql);
+            $sql = "SELECT * FROM teams WHERE team_id IN (SELECT team_id FROM user_team WHERE user_id=?)";
+            $stmt = $this->koneksi->conn->prepare($sql);
             $stmt->execute([$id_user]);
             $dataTeams = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $dataTeams;

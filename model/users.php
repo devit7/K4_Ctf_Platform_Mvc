@@ -144,6 +144,21 @@ class Users
         }
     }
 
+    public function updateNewPassword($id_user, $newPassword){
+        try{
+        $sql = 'UPDATE users SET password=? WHERE user_id= ?';
+        $stmt = $this->koneksi->conn->prepare($sql);
+        $query=[$this->password,$this->id_user];
+        if($stmt->execute($query)){
+            echo'Berhasil';
+        }else{
+            echo 'gagal';
+        }
+        }catch (PDOException $e) {
+            echo $sql . '<br>'. $e->getMessage();
+        }
+    }
+
 
     public function deleteByid($id)
     {

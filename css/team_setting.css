@@ -42,7 +42,51 @@ body{
     padding: 1rem 3rem;
     height: 100%;
     color: rgb(217 249 157 );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.area-kanan-setting{
+    width: 100%;
+    max-width: 600px;
+    background-color: rgb(31 41 55);
+    border-radius: 5px;
+    padding: 1rem 3rem;
+    height: 100%;
+    color: rgb(217 249 157 );
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.area-kanan-setting form{
+    width: 100%;
+}
+
+.area-kanan-setting form input{
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid rgb(51 85 0 );
+    background-color: #18202c;
+    color: #bfdbfe;
+}
+
+.area-kanan-setting button{
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid rgb(190 242 100 );
+    background-color: rgb(51 85 0 );
+    color: rgb(190 242 100 );
+    cursor: pointer;
+}
+
 
 
 table{
@@ -76,6 +120,10 @@ table tr td{
 .menu:hover{
     background-color: #1e3a8a;
 }
+.menu.active {
+    background-color: #1e3a8a;
+}
+
 
 .menu a{
     color: #bfdbfe;
