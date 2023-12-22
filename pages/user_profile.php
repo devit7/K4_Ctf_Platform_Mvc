@@ -30,15 +30,18 @@ include('../component/check_sesion.php');
     </div>
     <div class="area-bawah">
       <div class="tombol-area">
-        <div class="menu">
-          <a href=""> Profile </a>
+        <div id="menu-prof" onclick="showDefaultProfile()" class="menu active">
+          <a href="#"> Profile </a>
         </div>
-        <div class="menu">
-          <a href=""> Authentication </a>
+        <div id="menu-auth" onclick="showAuthProfile()" class="menu">
+          <a href="#"> Authentication </a>
+        </div>
+        <div id="menu-logout" onclick="showLogoutProfile()" class="menu">
+          <a href="#"> Logout </a>
         </div>
       </div>
-      <div class="form-area">
-        <?php include '../model/users.php';
+      <div id="profile-area" class="form-area">
+        <?php require_once '../model/users.php';
         $users = new Users();
         $id = $_SESSION['id_user'];
         $dataId = $users->getByid($id);
@@ -64,8 +67,8 @@ include('../component/check_sesion.php');
           </div>
           </form>
       </div>
-      <div class="form-area-auth">
-        <?php 
+      <div id="auth-area" class="form-area-auth">
+        <?php
         $id = $_SESSION['id_user'];
         $dataId = $users->getByid($id);
         foreach ($dataId as $user) :
@@ -74,22 +77,61 @@ include('../component/check_sesion.php');
             <h2>Profile Setting</h2>
             <div class="form-group">
               <label for="">Username</label>
-              <input type="text" id="nama" disabled name="nama" value="<?= $user['username'] ?>" />
+              <input type="text" id="nama" name="nama" value="<?= $user['username'] ?>" />
               <label for="nama">New Password</label>
-              <input type="text" id="nama" name="nama"  />
+              <input type="text" id="nama" name="nama" />
               <label for="provinsi">Confirm New Password</label>
-              <input type="text" id="provinsi" name="provinsi"  />
+              <input type="text" id="provinsi" name="provinsi" />
             </div>
           <?php
-          endforeach;
+        endforeach;
           ?>
           <div class="form-button">
             <button type="submit" class="bt-save">Save</button>
           </div>
           </form>
       </div>
+      <div id="logout-area" class="form-logout" >
+        <form action="../controller/controller_logout.php" method="POST">
+          <h2>Sure to Logout ??</h2>
+          <div class="form-button">
+            <button type="submit" >Logout</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
+
+  <script>
+    function setActive(element) {
+      var menu = document.getElementsByClassName("menu");
+      for (var i = 0; i < menu.length; i++) {
+        menu[i].classList.remove("active");
+      }
+      element.classList.add("active");
+    };
+
+    function showDefaultProfile() {
+      document.getElementById('profile-area').style.display = 'block';
+      document.getElementById('auth-area').style.display = 'none';
+      document.getElementById('logout-area').style.display = 'none';
+      setActive(document.getElementById('menu-prof'));
+    }
+
+    function showAuthProfile() {
+      document.getElementById('profile-area').style.display = 'none';
+      document.getElementById('auth-area').style.display = 'block';
+      document.getElementById('logout-area').style.display = 'none';
+      setActive(document.getElementById('menu-auth'));
+    }
+
+    function showLogoutProfile() {
+      document.getElementById('profile-area').style.display = 'none';
+      document.getElementById('auth-area').style.display = 'none';
+      document.getElementById('logout-area').style.display = 'block';
+      setActive(document.getElementById('menu-logout'));
+    }
+  </script>
 </body>
 
 </html>

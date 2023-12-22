@@ -28,13 +28,19 @@
 
             <?php if (isset($_SESSION['id_user'])) : ?>
                 <div class="nav-log">
-                    <a class="us" href="../pages/user_profile.php"><span>Hello <?= $_SESSION['id_user'] ?></span>
+                    <a class="us" href="../pages/user_profile.php">
+                        <?php
+                        require_once '../model/users.php';
+                        $users = new Users();
+                        $id = $_SESSION['id_user'];
+                        $dataId = $users->getByid($id);
+                        foreach ($dataId as $user) :
+                        ?>
+                        <span>Hello <b><?= $user['nama'] ?></b></span>
+                        <?php
+                        endforeach;
+                        ?>
                     </a>
-                    <div class="login-button">
-                        <a href="../controller/controller_logout.php">
-                            <span>Logout &rarr;</span>
-                        </a>
-                    </div>
                 </div>
             <?php else : ?>
                 <div class="login-button">

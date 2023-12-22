@@ -130,7 +130,7 @@ class Teams
 
     public function listTeambyUser($id_user){
         try{
-            $sql="SELECT u.nama, ut.role FROM users AS u JOIN user_team AS ut ON u.user_id = ut.user_id WHERE ut.team_id IN (SELECT team_id FROM user_team WHERE user_id = ?) ";
+            $sql="SELECT * FROM users AS u JOIN user_team AS ut ON u.user_id = ut.user_id WHERE ut.team_id IN (SELECT team_id FROM user_team WHERE user_id = ?) ";
             $stmt = $this->koneksi->conn->prepare($sql);
             $stmt->execute([$id_user]);
             $dataTeams = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -63,6 +63,10 @@ body{
     text-decoration: none;
 }
 
+.menu.active{
+    background-color: #1e3a8a;
+}
+
 .form-area h2{
     margin-bottom: 20px;
 }
@@ -107,3 +111,51 @@ body{
     cursor: pointer;
     transition: 0.3s;
 }
+
+.form-area-auth{
+    width: 100%;
+    max-width: 600px;
+    background-color: rgb(31 41 55);
+    border-radius: 5px;
+    padding: 1rem 3rem;
+    height: 100%;
+    color: rgb(217 249 157 );
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-area-auth h2{
+    margin-bottom: 20px;
+}
+
+.form-logout{
+    width: 100%;
+    max-width: 600px;
+    background-color: rgb(31 41 55);
+    border-radius: 5px;
+    padding: 1rem 3rem;
+    height: 100%;
+    color: rgb(217 249 157 );
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-logout h2{
+    margin-bottom: 20px;
+}
+
+.form-logout button{
+    width: 100%;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid rgb(242, 100, 100);
+    background-color: rgb(85, 0, 0);
+    color: rgb(242, 100, 100);
+    cursor: pointer;
+    transition: 0.3s;
+}
+

@@ -39,7 +39,7 @@ include('../component/check_sesion.php');
                         <th>Provinsi</th>
                     </tr>
                     <?php
-                    include '../model/users.php';
+                    require_once '../model/users.php';
                     $users = new Users();
                     $dataUser=$users->getAll();
                     foreach ($dataUser as $user):

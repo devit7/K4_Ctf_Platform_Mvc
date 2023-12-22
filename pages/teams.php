@@ -39,7 +39,7 @@ include('../component/check_sesion.php');
                         <th>Website</th>
                     </tr>
                     <?php
-                    include '../model/teams.php';
+                    require_once '../model/teams.php';
                     $teams = new Teams();
                     $dataTeams=$teams->getAll();
                     foreach ($dataTeams as $team):
