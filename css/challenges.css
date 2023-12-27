@@ -12,7 +12,7 @@ body{
 
 a{
     text-decoration: none;
-    
+    color: rgb(217 249 157 )
 }
 
 
@@ -59,6 +59,12 @@ a{
     overflow-y: scroll;
 }
 
+.kategori.active{
+    background-color: rgb(217 249 157 );
+    box-shadow: 0 0 10px rgb(217 249 157);
+    color: rgb(17 24 39 );
+}
+
 .kategori :hover{
     background-color: rgb(217 249 157 );
     box-shadow: 0 0 10px rgb(217 249 157);
@@ -92,6 +98,12 @@ a{
     color: rgb(17 24 39 );
     cursor: pointer;
 }
+.active{
+    background-color: rgb(217 249 157 );
+    box-shadow: 0 0 10px rgb(217 249 157);
+    color: rgb(17 24 39 );
+}
+
 /* Deskripsi */
 .deskripsi{
     background-color: rgb(19, 25, 35); 

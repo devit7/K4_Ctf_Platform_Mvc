@@ -97,6 +97,28 @@ class Teams
         }
     }
 
+    public function updateById($id_teams,$nama_teams,$afiliasi,$website){
+        try{
+            $sql = "UPDATE teams SET nama_team=?,afiliasi=?,website=? WHERE team_id=?";
+            $stmt = $this->koneksi->conn->prepare($sql);
+            $stmt->execute([$nama_teams,$afiliasi,$website,$id_teams]);
+            return $stmt->rowCount();
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function deteleTeamById($id_teams){
+        try{
+            $sql = "DELETE FROM teams WHERE team_id=?";
+            $stmt = $this->koneksi->conn->prepare($sql);
+            $stmt->execute([$id_teams]);
+            return $stmt->rowCount();
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
     public function joinTeam($team_name,$team_pass,$id_user){
         try{
             $sql1= "SELECT * FROM teams WHERE nama_team='$team_name' AND pass_team='$team_pass'";
