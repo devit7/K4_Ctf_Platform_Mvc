@@ -221,6 +221,19 @@ a{
     cursor: pointer;
 }
 
+.solved-flag{
+    display: flex;
+    align-items: center;
+    
+    cursor: pointer;
+}
+
+.solved-flag p{
+    background-color: rgb(217 249 157 );
+    color: rgb(17 24 39 );
+    padding: 0.5rem;
+    border-radius: 5px;
+}
 
 
 hr{

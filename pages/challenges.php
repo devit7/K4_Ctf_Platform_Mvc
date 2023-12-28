@@ -101,11 +101,34 @@ include('../component/check_sesion.php');
                     <hr>
                     <!-- Flag Form -->
                     <div class="flag">
-                        <form name="form-flag" action="">
+                        <?php
+                        if (isset($_GET['soal'])) {
+                            $id_soal = $_GET['soal'];
+                        } else {
+                            $id_soal = '1234';
+                        }
+                        require_once '../model/teams.php';
+                        $team = new Teams();
+                        $team_id=$team->listTeamByUser($_SESSION['id_user']);
+                        $dataSoal=$chall->isChallSolved($id_soal,$team_id[0]['team_id']);
+                        if ($dataSoal) {
+                            $detailSolve=$chall->getSolveByIdChallAndTeamId($id_soal,$team_id[0]['team_id']);
+                        ?>
+                        <div class="solved-flag">
+                            <p> Solved At <?=$detailSolve[0]['date_solve']?>  </p>
+                        </div>
+                        <?php
+                        } else {
+                        ?>
+                        <form name="form-flag" method="POST" action="../controller/controller_check_flag.php">
                             <h2>Flag </h2>
+                            <input type="hidden" name="id_chall" value="<?= isset($_GET['soal']) ? $_GET['soal']:'' ?>">
                             <input id="in-flag" name="flag" type="text" placeholder="K4CTF{admin}">
-                            <button id="btn-flag" onclick="checkFlag()" type="button">submit</button>
+                            <button id="btn-flag" type="submit">submit</button>
                         </form>
+                        <?php
+                        }
+                        ?>
 
                     </div>
                     <hr>
@@ -113,51 +136,19 @@ include('../component/check_sesion.php');
                     <div class="solper">
                         <h2>Solved By :</h2>
                         <div class="solved">
-                            <div class="">
-                                <h4>> Devit</h4>
+                            <?php
+                            if (isset($_GET['soal'])) {
+                                $id_soal = $_GET['soal'];
+                            } else {
+                                $id_soal = '1234';
+                            }
+                            $dataSolved = $chall->getSolveByChallId($id_soal);
+                            foreach ($dataSolved as $solved) :
+                            ?>
+                            <div>
+                                <h4>> Team [ <?= $solved['nama_team'] ?> ] at <?=$solved['date_solve']?></h4>
                             </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="solved-1">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="solved-1">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
-                            <div class="">
-                                <h4>> Devit</h4>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -166,6 +157,13 @@ include('../component/check_sesion.php');
                 <h1>My Team</h1>
             </div>
         </div>
+        <?php
+        include '../component/modals.php';
+        if (isset($_GET['status'])) {
+            $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
+            createModal('Register Failed', $pesan);
+        }
+        ?>
     </div>
 
     <script>
@@ -174,26 +172,6 @@ include('../component/check_sesion.php');
         idpindah.addEventListener('click', () => {
             window.location.href = './team_register.php'
         })
-
-
-        function checkFlag() {
-            console.log('t');
-            let flag_form = document.forms['form-flag'];
-            let newFrom = new FormData(flag_form);
-            console.log(newFrom);
-            let flag_key = newFrom.keys();
-            for (let i of flag_key) {
-                let isi = newFrom.get(i);
-                console.log('isis' + isi);
-                if (isi.trim() == '') {
-                    alert('Wrong Flag !!');
-                } else if (isi == 'K4CTF{admin}') {
-                    alert('Nice Solved !!');
-                } else {
-                    alert('Wrong Flag !!');
-                }
-            }
-        }
         document.addEventListener("DOMContentLoaded", function () {
             let categoryLinks = document.querySelectorAll('.kategori-1');
 
@@ -207,7 +185,24 @@ include('../component/check_sesion.php');
                 });
             });
         });
-    </script>
+        //get query url
+        let url = new URL(window.location.href);
+        let status = url.searchParams.get('status');
+
+        let close_modal_join = document.getElementById('close-modal-join');
+        let modal_join = document.getElementById('modal-join');
+
+        if (status === 'gagal') {
+            modal_join.style.display = 'flex';
+        }
+
+        close_modal_join.addEventListener('click', () => {
+            modal_join.style.display = 'none';
+            if (status === 'gagal') {
+                url.searchParams.delete('status');
+                history.replaceState({}, document.title, url.href); //untuk menghilangkan status di url
+            }
+        });
     </script>
 </body>
 

@@ -108,12 +108,19 @@ class Teams
         }
     }
 
-    public function deteleTeamById($id_teams){
+    public function deleteTeamById($id_teams,$password){
         try{
-            $sql = "DELETE FROM teams WHERE team_id=?";
-            $stmt = $this->koneksi->conn->prepare($sql);
-            $stmt->execute([$id_teams]);
-            return $stmt->rowCount();
+            $sql1= "SELECT * FROM teams WHERE team_id='$id_teams' AND pass_team='$password'";
+            $stmt1= $this->koneksi->conn->query($sql1);
+            $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+            if(count($dataNamaTeams)>0){
+                $sql2 = "DELETE FROM user_team WHERE team_id=?";
+                $stmt2 = $this->koneksi->conn->prepare($sql2);
+                $stmt2->execute([$id_teams]);
+                return true;
+            }else{
+                return false;
+            }
         }catch(PDOException $e){
             return $e->getMessage();
         }

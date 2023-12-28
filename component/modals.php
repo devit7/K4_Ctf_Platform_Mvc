@@ -1,7 +1,8 @@
 <?php
 function createModal( $title, $message) {
+        $headerImgSrc = 'https://iili.io/JTtz0Xt.png';
+
     $modalId = 'modal-join';
-    $headerImgSrc = 'https://iili.io/JTtz0Xt.png';
     echo '<link rel="stylesheet" href="../css/modals.css">'; // Tambahkan ini untuk menyertakan stylesheet
     echo '<div id="' . $modalId . '" class="main-modal">';
     echo '<div class="modal-helper">';

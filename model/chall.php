@@ -102,6 +102,24 @@ class Challs
         return $dataChall;
     }
 
+    public function getSolveByIdChallAndTeamId($id_chall,$team_id)
+    {
+        $sql = "SELECT * FROM solves WHERE chall_id = ? AND team_id = ?";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute([$id_chall,$team_id]);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
+    public function getSolveByChallId($id_chall)
+    {
+        $sql = "SELECT solves.*, teams.nama_team FROM solves JOIN teams ON solves.team_id = teams.team_id WHERE solves.chall_id = ? ";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute([$id_chall]);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
     public function getAllCategory()
     {
         $sql = "SELECT * FROM categories";
@@ -138,6 +156,39 @@ class Challs
             return $dataChall;
         } catch (PDOException $e) {
             echo $e->getMessage();
+        }
+    }
+
+    public function checkFlag($flag, $id_chall,$id_team)
+    {
+        $sql = "SELECT * FROM chall WHERE flag = ? AND chall_id = ?";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute([$flag, $id_chall]);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (count($dataChall) > 0) {
+            $sql1= "INSERT INTO solves (solve_id, team_id, chall_id,date_solve) VALUES (?,?,?,?)";
+            $stmt1 = $this->koneksi->conn->prepare($sql1);
+            $id_solve = time();
+            $date = date("Y-m-d H:i:s");
+            session_start();
+
+            $stmt1->execute([$id_solve,$id_team,$id_chall,$date]);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isChallSolved($id_chall,$team_id)
+    {
+        $sql = "SELECT * FROM solves WHERE chall_id = ? AND team_id = ?";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute([$id_chall, $team_id]);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (count($dataChall) > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
