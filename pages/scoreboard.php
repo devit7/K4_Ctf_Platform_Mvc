@@ -39,126 +39,21 @@ include('../component/check_sesion.php');
                                 <th>Team</th>
                                 <th>Score</th>
                             </tr>
+                            <?php
+                            require_once '../model/teams.php';
+                            $teams = new Teams();
+                            $dataTeams = $teams->laderboardAll();
+                            $no=1;
+                            foreach ($dataTeams as $team):
+                            ?>
                             <tr>
-                                <td>1</td>
-                                <td>Team 1</td>
-                                <td>1000</td>
+                                <td><?=$no++?></td>
+                                <td><?=$team['team_name']?></td>
+                                <td ><?=$team['total_points']?></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Team 2</td>
-                                <td>900</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Team 3</td>
-                                <td>800</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Team 4</td>
-                                <td>700</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Team 5</td>
-                                <td>600</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Team 6</td>
-                                <td>500</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Team 7</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Team 8</td>
-                                <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Team 9</td>
-                                <td>200</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Team 10</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Team 7</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Team 8</td>
-                                <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Team 9</td>
-                                <td>200</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Team 10</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Team 5</td>
-                                <td>600</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Team 6</td>
-                                <td>500</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Team 7</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Team 8</td>
-                                <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Team 9</td>
-                                <td>200</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Team 10</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Team 7</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Team 8</td>
-                                <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Team 9</td>
-                                <td>200</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Team 10</td>
-                                <td>100</td>
-                            </tr>
+                            <?php
+                            endforeach;
+                            ?>
                         </table>
                     </div>
                     
@@ -174,78 +69,22 @@ include('../component/check_sesion.php');
                                 <tr>
                                     <th>Team</th>
                                     <th>Chall</th>
+                                    <th>Category</th>
                                     <th>Time</th>
                                 </tr>
+                                <?php 
+                                $dataFirstB = $teams->firstBloodAll();
+                                foreach ($dataFirstB as $fb):
+                                ?>
                                 <tr>
-                                    <td>Team 1</td>
-                                    <td>Chall 1</td>
-                                    <td>00:00:00</td>
+                                    <td><?=$fb['team_name']?></td>
+                                    <td><?=$fb['challenge_name']?></td>
+                                    <td><?=$fb['category_name']?></td>
+                                    <td><?=$fb['first_blood_time']?></td>
                                 </tr>
-                                <tr>
-                                    <td>Team 2</td>
-                                    <td>Chall 2</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 3</td>
-                                    <td>Chall 3</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 4</td>
-                                    <td>Chall 4</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 5</td>
-                                    <td>Chall 5</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 6</td>
-                                    <td>Chall 6</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 7</td>
-                                    <td>Chall 7</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 8</td>
-                                    <td>Chall 8</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 9</td>
-                                    <td>Chall 9</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 10</td>
-                                    <td>Chall 10</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 7</td>
-                                    <td>Chall 7</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 8</td>
-                                    <td>Chall 8</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 9</td>
-                                    <td>Chall 9</td>
-                                    <td>00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td>Team 10</td>
-                                    <td>Chall 10</td>
-                                    <td>00:00:00</td>
-                                </tr>
+                                <?php
+                                endforeach;
+                                ?>
                             </table>
                         </div>
                     </div>

@@ -226,6 +226,7 @@ a{
     align-items: center;
     
     cursor: pointer;
+    width: 100%;
 }
 
 .solved-flag p{
@@ -233,6 +234,9 @@ a{
     color: rgb(17 24 39 );
     padding: 0.5rem;
     border-radius: 5px;
+    text-align: center ;
+    width: 100%;
+    font-weight: bold;
 }
 
 

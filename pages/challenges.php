@@ -1,5 +1,27 @@
 <?php
 include('../component/check_sesion.php');
+require_once '../model/chall.php';
+session_chall();
+
+$chall = new Challs();
+if(!isset($_GET['category'])){ 
+    $dataFirst = $chall->getFirstCategoryAndChall();
+    if($dataFirst){
+        header('Location: ./challenges.php?category='.$dataFirst[0]['nama_category'].'&soal='.$dataFirst[0]['chall_id']);
+    }else{
+        header('Location: ./challenges.php?status=belum tersedia');
+    }
+}
+//categoryhelper
+if(isset($_GET['category']) && !isset($_GET['soal'])){//jika ada category tapi tidak ada soal
+    $dataCategoryHelper = $chall->getCategoryHelper($_GET['category']);
+    if($dataCategoryHelper){
+        header('Location: ./challenges.php?category='.$dataCategoryHelper[0]['nama_category'].'&soal='.$dataCategoryHelper[0]['chall_id']);
+    }else{
+        header('Location: ./challenges.php?status=belum tersedia');
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +39,7 @@ include('../component/check_sesion.php');
     <div class="layar">
         <!-- Navbar -->
         <?php
-        include '../component/navbar.php';
+        include_once '../component/navbar.php';
         ?>
         <!-- Content -->
         <div class="container-chall ">
@@ -27,8 +49,6 @@ include('../component/check_sesion.php');
             <!-- Kategori -->
             <div class="kategori">
                 <?php
-                require_once '../model/chall.php';
-                $chall = new Challs();
                 $dataCategory = $chall->getAllCategory();
                 foreach ($dataCategory as $category) :
                 $isActive = isset($_GET['category']) && $_GET['category'] == $category['nama_category'];
@@ -69,8 +89,6 @@ include('../component/check_sesion.php');
                 <?php
                 if (isset($_GET['soal'])) {
                     $id_soal = $_GET['soal'];
-                } else {
-                    $id_soal = '1234';
                 }
                 $dataSoal = $chall->getByIdSoal($id_soal);
                 foreach ($dataSoal as $challData) :
@@ -139,8 +157,6 @@ include('../component/check_sesion.php');
                             <?php
                             if (isset($_GET['soal'])) {
                                 $id_soal = $_GET['soal'];
-                            } else {
-                                $id_soal = '1234';
                             }
                             $dataSolved = $chall->getSolveByChallId($id_soal);
                             foreach ($dataSolved as $solved) :

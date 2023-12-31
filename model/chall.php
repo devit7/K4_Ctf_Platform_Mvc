@@ -120,6 +120,30 @@ class Challs
         return $dataChall;
     }
 
+    public function getFirstCategoryAndChall()
+    {
+        $sql = "SELECT chall.*, categories.nama_category FROM chall JOIN categories ON chall.category_id = categories.category_id LIMIT 1 ";
+        $query = $this->koneksi->conn->query($sql);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        //jika data kosong
+        if (count($dataChall) == 0) {
+           return false;
+        }
+        return $dataChall;
+    }
+
+    public function getCategoryHelper($nama_category){
+        $sql = "SELECT chall.*, categories.nama_category FROM chall JOIN categories ON chall.category_id = categories.category_id where nama_category=? LIMIT 1 ";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute([$nama_category]);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        //jika data kosong
+        if (count($dataChall) == 0) {
+           return false;
+        }
+        return $dataChall;
+    }
+
     public function getAllCategory()
     {
         $sql = "SELECT * FROM categories";
