@@ -213,4 +213,41 @@ class Teams
             return $e->getMessage();
         }
     }
+
+    public function statTeamByUserId()
+    {
+        $sql = "SELECT
+        users.nama AS nama_user,
+        chall.nama_chall AS Challname,
+        categories.nama_category AS Category,
+        solves.date_solve AS Time
+    FROM
+        solves
+    JOIN
+        teams ON solves.team_id = teams.team_id
+    JOIN
+        chall ON solves.chall_id = chall.chall_id
+    JOIN
+        categories ON chall.category_id = categories.category_id
+    JOIN
+        users ON solves.user_id = users.user_id
+    WHERE
+        solves.user_id = ?
+    ORDER BY
+        solves.date_solve ASC;
+    ";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute([$_SESSION['id_user']]);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
+    public function totalSolvedByUserId()
+    {
+        $sql = "SELECT COUNT(*) AS total_solved FROM solves WHERE user_id = ? ";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute([$_SESSION['id_user']]);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
 }

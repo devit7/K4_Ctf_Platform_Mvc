@@ -102,14 +102,7 @@ class Challs
         return $dataChall;
     }
 
-    public function getSolveByIdChallAndTeamId($id_chall,$team_id)
-    {
-        $sql = "SELECT * FROM solves WHERE chall_id = ? AND team_id = ?";
-        $query = $this->koneksi->conn->prepare($sql);
-        $query->execute([$id_chall,$team_id]);
-        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $dataChall;
-    }
+
 
     public function getSolveByChallId($id_chall)
     {
@@ -190,13 +183,12 @@ class Challs
         $query->execute([$flag, $id_chall]);
         $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
         if (count($dataChall) > 0) {
-            $sql1= "INSERT INTO solves (solve_id, team_id, chall_id,date_solve) VALUES (?,?,?,?)";
+            $sql1= "INSERT INTO solves (solve_id, team_id, chall_id,user_id,date_solve) VALUES (?,?,?,?,?)";
             $stmt1 = $this->koneksi->conn->prepare($sql1);
             $id_solve = time();
             $date = date("Y-m-d H:i:s");
-            session_start();
-
-            $stmt1->execute([$id_solve,$id_team,$id_chall,$date]);
+            $iduser = $_SESSION['id_user'];
+            $stmt1->execute([$id_solve,$id_team,$id_chall,$iduser,$date]);
             return true;
         } else {
             return false;
@@ -210,10 +202,17 @@ class Challs
         $query->execute([$id_chall, $team_id]);
         $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
         if (count($dataChall) > 0) {
-            return true;
+            return $dataChall;
         } else {
             return false;
         }
     }
+
+
+
+
+
+
+
 
 }

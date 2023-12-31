@@ -122,18 +122,15 @@ if(isset($_GET['category']) && !isset($_GET['soal'])){//jika ada category tapi t
                         <?php
                         if (isset($_GET['soal'])) {
                             $id_soal = $_GET['soal'];
-                        } else {
-                            $id_soal = '1234';
-                        }
+                        } 
                         require_once '../model/teams.php';
                         $team = new Teams();
                         $team_id=$team->listTeamByUser($_SESSION['id_user']);
                         $dataSoal=$chall->isChallSolved($id_soal,$team_id[0]['team_id']);
                         if ($dataSoal) {
-                            $detailSolve=$chall->getSolveByIdChallAndTeamId($id_soal,$team_id[0]['team_id']);
                         ?>
                         <div class="solved-flag">
-                            <p> Solved At <?=$detailSolve[0]['date_solve']?>  </p>
+                            <p> Solved At <?=$dataSoal[0]['date_solve']?>  </p>
                         </div>
                         <?php
                         } else {
