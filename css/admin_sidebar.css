@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(17, 24, 39);
+    font-family: 'Unifont', 'Fira Code', monospace;
+    height: 100vh;
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    color: rgb(217, 249, 157);
+    border-bottom: 1px solid #334155;
+}
+
+.menu h3 {
+    justify-content: flex-start;
+    font-size: 1rem;
+    margin-bottom: 40px;
+    color: rgba(217, 249, 157, 0.534);
+}
+
+.sidebar {
+    width: 18%;
+    height: 100%;
+    background-color: #1f2937;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-right: 1px solid #334155;
+    padding-top: 20px;
+}
+
+.sidebar .logo {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 20px;
+}
+
+.sidebar .logo img {
+    width: 30px;
+    height: auto;
+}
+
+.sidebar .logo span {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.sidebar .menu {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+.sidebar .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .menu ul li {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.sidebar .menu ul li svg {
+    width: 20px;
+    height: auto;
+    margin-right: 10px;
+}
+
+
+.sidebar .menu ul li a {
+    text-decoration: none;
+    color: rgb(217, 249, 157);
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.sidebar .menu ul li:hover {
+    background-color: rgb(51 85 0 ); 
+}
+
+.layout{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.nav{
+    background-color: rgb(31 41 55);
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #334155;
+}
+
+.nav-left{
+    display: flex;
+    align-items: center;
+}
+
+.nav-right{
+    display: flex;
+    align-items: center;
+}
+

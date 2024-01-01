@@ -1,0 +1,124 @@
+.db-admin{
+    width: 100%;
+    padding: 40px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bagian-1{
+    display: flex;
+    flex-direction: column;
+}
+
+.navigate{
+    display: flex;
+    margin-top: 20px;
+}
+
+.navigate a{
+    text-decoration: none;
+    color: rgba(217, 249, 157, 0.705);
+    margin-right: 20px;
+}
+
+.navigate svg{
+    width: 15px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    background-color: #1e1b4b;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.info svg{
+    width: 15px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.info p{
+    color: rgb(156 163 175 );
+}
+
+.bagian-2{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card{
+    background-color: rgb(31 41 55);
+    border-radius: 5px;
+    width:250px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.judul{
+    color: rgba(217, 249, 157, 0.514);
+    padding: 10px 20px;
+}
+.st{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+.st p{
+    color: rgb(156 163 175 );
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+.st svg{
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+.color-blue{
+    width: 100%;
+    height: 5px;
+    background-color: rgb(190 242 100 );
+    border-radius: 0 0 5px 5px;
+}
+
+
+.bagian-3{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.st-solve{
+    background-color: rgb(31 41 55);
+    width: 60%;
+    height: 50%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+.new-solve{
+    border-radius: 5px;
+    background-color: rgb(31 41 55);
+    width: 35%;
+    height: 50%;
+    padding: 10px;
+}
+.daftar-solve{
+    overflow-y: scroll;
+    max-height: 300px;
+}

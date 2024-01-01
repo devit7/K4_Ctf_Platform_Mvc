@@ -14,9 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //mengambil data id_user
         $id_user=$login[0]['user_id'];
         $_SESSION['id_user']=$id_user;
-        //check session
-        echo $_SESSION['id_user'];
-        header('Location: ../pages/scoreboard.php');
+        //mengambil data role
+        $role=$login[0]['role'];
+        if($role=='admin'){
+            $_SESSION['role']='admin';
+            header('Location: ../pages/admin_index.php');
+        }else{
+            $_SESSION['role']='user';
+            header('Location: ../pages/scoreboard.php');
+        }
     }else{
         echo "Username atau Password salah";
         header('Location: ../pages/login.php?status=gagal');

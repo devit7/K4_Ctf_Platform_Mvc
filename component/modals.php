@@ -1,10 +1,15 @@
 <?php
-function createModal( $title, $message) {
+function createModal( $title, $message, $type) {
+    if ($type == 'success'){
+        $headerImgSrc = 'https://iili.io/JTtzfdx.png';
+    }else if ($type == 'failed'){
         $headerImgSrc = 'https://iili.io/JTtz0Xt.png';
+    }
+
 
     $modalId = 'modal-join';
     echo '<link rel="stylesheet" href="../css/modals.css">'; // Tambahkan ini untuk menyertakan stylesheet
-    echo '<div id="' . $modalId . '" class="main-modal">';
+    echo '<div id="'. $modalId .'" class="main-modal">';
     echo '<div class="modal-helper">';
     echo '<div class="modal-content">';
     echo '<div class="modal-header">';

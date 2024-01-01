@@ -33,9 +33,9 @@ include_once('../component/check_team.php');
               <form method="POST" action="../controller/controller_create_team.php">
               <div class="modal-body1">
                 <label for="teamname">Team Name</label>
-                <input name="team_name" id="teamname" type="text">
+                <input name="team_name" id="teamname" type="text" maxlength="15">
                 <label for="teampass">Team Password</label>
-                <input name="team_pass" id="teampass" type="password">
+                <input name="team_pass" id="teampass" type="password" maxlength="15">
               </div>
               <div class="modal-footer1">
                 <button type="submit" class="bt-create1">+ Create</button>
@@ -79,7 +79,7 @@ include_once('../component/check_team.php');
 
         if (isset($_GET['status'])) {
           $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
-          createModal('Register Failed', $pesan);
+          createModal('Register Failed', $pesan, 'failed');
       }
 
       ?>

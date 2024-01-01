@@ -137,6 +137,7 @@ if(isset($_GET['category']) && !isset($_GET['soal'])){//jika ada category tapi t
                         ?>
                         <form name="form-flag" method="POST" action="../controller/controller_check_flag.php">
                             <h2>Flag </h2>
+                            <input type="hidden" name="category" value="<?= isset($_GET['category']) ? $_GET['category']:'' ?>">
                             <input type="hidden" name="id_chall" value="<?= isset($_GET['soal']) ? $_GET['soal']:'' ?>">
                             <input id="in-flag" name="flag" type="text" placeholder="K4CTF{admin}">
                             <button id="btn-flag" type="submit">submit</button>
@@ -172,9 +173,14 @@ if(isset($_GET['category']) && !isset($_GET['soal'])){//jika ada category tapi t
         </div>
         <?php
         include '../component/modals.php';
-        if (isset($_GET['status'])) {
+
+        if (isset($_GET['status']) ) {
             $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
-            createModal('Register Failed', $pesan);
+            if($_GET['status'] == 'berhasil'){
+                createModal('Flag Solved', $pesan, 'success');
+            }else{
+                createModal('Wrong Flag', $pesan, 'failed');
+            }
         }
         ?>
     </div>
@@ -205,13 +211,13 @@ if(isset($_GET['category']) && !isset($_GET['soal'])){//jika ada category tapi t
         let close_modal_join = document.getElementById('close-modal-join');
         let modal_join = document.getElementById('modal-join');
 
-        if (status === 'gagal') {
+        if (status === 'berhasil' || status === 'gagal') {
             modal_join.style.display = 'flex';
         }
 
         close_modal_join.addEventListener('click', () => {
             modal_join.style.display = 'none';
-            if (status === 'gagal') {
+            if (status === 'berhasil' || status === 'gagal') {
                 url.searchParams.delete('status');
                 history.replaceState({}, document.title, url.href); //untuk menghilangkan status di url
             }

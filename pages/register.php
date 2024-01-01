@@ -74,7 +74,7 @@ session_start();
 
         if (isset($_GET['status'])) {
             $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
-            createModal('Register Failed', $pesan);
+            createModal('Register Failed', $pesan, 'failed');
         }
         ?>
     </div>
