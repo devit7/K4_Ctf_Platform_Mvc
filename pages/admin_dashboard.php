@@ -44,7 +44,7 @@
             </div>
             <div class="card">
                 <div class="judul">
-                    <h4>Users</h4>
+                    <h4>Teams</h4>
                 </div>
                 <div class="st">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -57,7 +57,7 @@
             </div>
             <div class="card">
                 <div class="judul">
-                    <h4>Users</h4>
+                    <h4>Chall</h4>
                 </div>
                 <div class="st">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -70,13 +70,25 @@
             </div>
             <div class="card">
                 <div class="judul">
-                    <h4>Users</h4>
+                    <h4>Category</h4>
                 </div>
                 <div class="st">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                     </svg>
 
+                    <p>20</p>
+                </div>
+                <div class="color-blue"></div>
+            </div>
+            <div class="card">
+                <div class="judul">
+                    <h4>Solved</h4>
+                </div>
+                <div class="st">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                    </svg>
                     <p>20</p>
                 </div>
                 <div class="color-blue"></div>
@@ -84,8 +96,19 @@
         </div>
         <div class="bagian-3">
             <div class="st-solve">
-
+                <h3>Solved</h3>
+                <div>
+                    <div>
+                        <div>
+                            Forensic
+                        </div>
+                        <div>
+                            10%
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="new-solve">
                 <h3>New Solve</h3>
                 <div class="daftar-solve">
@@ -158,6 +181,55 @@
                     <div class="solve">
                         <div class="nama">
                             <h4>Devit</h4>
+                        </div>
+                    </div>
+                    <div class="solve">
+                        <div class="nama">
+                            <h4>Devit</h4>
+                        </div>
+                        <div class="soal">
+                            <h4>Soal</h4>
+                        </div>
+                        <div class="waktu">
+                            <h4>Waktu</h4>
+                        </div>
+                    </div>
+                    <div class="solve">
+                        <div class="nama">
+                            <h4>Devit</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-10">
+                <h3>Top 10</h3>
+                <div class="daftar-solve">
+                    <div class="solve">
+                        <div class="nama">
+                            <h4>Devit</h4>
+                        </div>
+                    </div>
+                    <div class="solve">
+                        <div class="nama">
+                            <h4>Devit</h4>
+                        </div>
+                    </div>
+                    <div class="solve">
+                        <div class="nama">
+                            <h4>Devit</h4>
+                        </div>
+                    </div>
+                    <div class="solve">
+                        <div class="nama">
+                            <h4>Devit</h4>
+                        </div>
+                    </div>
+                    <div class="solve">
+                        <div class="nama">
+                            <h4>Devit</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

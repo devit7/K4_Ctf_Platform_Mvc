@@ -10,7 +10,9 @@
     <div>
         <?php
             include '../component/admin_sidebar.php';
+            include './admin_dashboard.php';
         ?>
+        </div>
     </div>
 </body>
 </html>
