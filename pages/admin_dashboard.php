@@ -97,15 +97,21 @@
         <div class="bagian-3">
             <div class="st-solve">
                 <h3>Solved</h3>
-                <div>
-                    <div>
-                        <div>
-                            Forensic
-                        </div>
-                        <div>
-                            10%
-                        </div>
-                    </div>
+                <div class="tb-s">
+                    <table>
+                        <tr>
+                            <th>No</th>
+                            <th>Category</th>
+                            <th>Team Solved</th>
+                            <th>Total Chall</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Web</td>
+                            <td>20</td>
+                            <td>20</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
@@ -114,89 +120,13 @@
                 <div class="daftar-solve">
                     <div class="solve">
                         <div class="nama">
-                            <h4>Devit</h4>
+                            <h4>Team : </h4>
                         </div>
                         <div class="soal">
-                            <h4>Soal</h4>
+                            <h4>Chall : </h4>
                         </div>
                         <div class="waktu">
-                            <h4>Waktu</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                        <div class="soal">
-                            <h4>Soal</h4>
-                        </div>
-                        <div class="waktu">
-                            <h4>Waktu</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                        <div class="soal">
-                            <h4>Soal</h4>
-                        </div>
-                        <div class="waktu">
-                            <h4>Waktu</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                        <div class="soal">
-                            <h4>Soal</h4>
-                        </div>
-                        <div class="waktu">
-                            <h4>Waktu</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                        <div class="soal">
-                            <h4>Soal</h4>
-                        </div>
-                        <div class="waktu">
-                            <h4>Waktu</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                        <div class="soal">
-                            <h4>Soal</h4>
-                        </div>
-                        <div class="waktu">
-                            <h4>Waktu</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                        <div class="soal">
-                            <h4>Soal</h4>
-                        </div>
-                        <div class="waktu">
-                            <h4>Waktu</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
+                            <h4></h4>
                         </div>
                     </div>
                 </div>
@@ -207,27 +137,12 @@
                 <div class="daftar-solve">
                     <div class="solve">
                         <div class="nama">
-                            <h4>Devit</h4>
+                            <h4>1. [ R.A.T.I.O ]</h4>
                         </div>
                     </div>
                     <div class="solve">
                         <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
-                        </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Devit</h4>
+                            <h4>2. [ MOE ]</h4>
                         </div>
                     </div>
                 </div>
@@ -235,5 +150,4 @@
         </div>
     </div>
 </body>
-
 </html>
