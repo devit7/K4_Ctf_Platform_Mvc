@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <?php
+    include '../component/admin_sidebar.php';
+    ?>
     <div class="db-admin">
         <div class="bagian-1">
             <div class="halaman-bagian">
@@ -149,5 +152,8 @@
             </div>
         </div>
     </div>
+<!-- div pelengkap -->
+</div>
 </body>
+
 </html>
