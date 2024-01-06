@@ -85,27 +85,27 @@ class Users
         $this->password = $password;
     }
 
-    public function createData()
+    public function createData($role)
     {
         try {
-            $sql1= "SELECT username,email FROM users  ";
-            $stmt1= $this->koneksi->conn->query($sql1);
+            $sql1 = "SELECT username,email FROM users  ";
+            $stmt1 = $this->koneksi->conn->query($sql1);
             $dataUsername = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
-            foreach($dataUsername as $d):
-                if($this->username === $d['username']){
-                    $pesan['pesan']='Username Alredy Exists';
+            foreach ($dataUsername as $d) :
+                if ($this->username === $d['username']) {
+                    $pesan['pesan'] = 'Username Alredy Exists';
                     return $pesan;
                 }
-                if($this->email === $d['email']){
-                    $pesan['pesan']='Email Alredy Exists';
+                if ($this->email === $d['email']) {
+                    $pesan['pesan'] = 'Email Alredy Exists';
                     return $pesan;
                 }
             endforeach;
 
-            $sql = "INSERT INTO users (id, user_id, nama, provinsi, kampus, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO users (id, user_id, nama, provinsi, kampus, email, username, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
             $stmt = $this->koneksi->conn->prepare($sql);
-            $statement = $stmt->execute([NULL, $this->id_user, $this->nama, $this->provinsi, $this->kampus, $this->email, $this->username, $this->password]);
+            $statement = $stmt->execute([NULL, $this->id_user, $this->nama, $this->provinsi, $this->kampus, $this->email, $this->username, $this->password, $role]);
             return True;
         } catch (PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
@@ -124,38 +124,40 @@ class Users
     {
         $sql = 'SELECT * FROM users WHERE user_id=?';
         $stmt = $this->koneksi->conn->prepare($sql);
-        $stmt->execute([ $id ]);
+        $stmt->execute([$id]);
         $dataUserId = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $dataUserId;
     }
 
-    public function update($id, $nama,$provinsi,$kampus,$email ){
-        try{
-        $sql = 'UPDATE users SET nama=?, provinsi=?, kampus=?, email=? WHERE user_id= ?';
-        $stmt = $this->koneksi->conn->prepare($sql);
-        $query=[$nama,$provinsi,$kampus,$email,$id];
-        if($stmt->execute($query)){
-            echo'Berhasil';
-        }else{
-            echo 'gagal';
-        }
-        }catch (PDOException $e) {
-            echo $sql . '<br>'. $e->getMessage();
+    public function update($id, $nama, $provinsi, $kampus, $email)
+    {
+        try {
+            $sql = 'UPDATE users SET nama=?, provinsi=?, kampus=?, email=? WHERE user_id= ?';
+            $stmt = $this->koneksi->conn->prepare($sql);
+            $query = [$nama, $provinsi, $kampus, $email, $id];
+            if ($stmt->execute($query)) {
+                echo 'Berhasil';
+            } else {
+                echo 'gagal';
+            }
+        } catch (PDOException $e) {
+            echo $sql . '<br>' . $e->getMessage();
         }
     }
 
-    public function updateNewPassword($id_user, $newPassword){
-        try{
-        $sql = 'UPDATE users SET password=? WHERE user_id= ?';
-        $stmt = $this->koneksi->conn->prepare($sql);
-        $query=[$this->password,$this->id_user];
-        if($stmt->execute($query)){
-            echo'Berhasil';
-        }else{
-            echo 'gagal';
-        }
-        }catch (PDOException $e) {
-            echo $sql . '<br>'. $e->getMessage();
+    public function updateNewPassword($id_user, $newPassword)
+    {
+        try {
+            $sql = 'UPDATE users SET password=? WHERE user_id= ?';
+            $stmt = $this->koneksi->conn->prepare($sql);
+            $query = [$this->password, $this->id_user];
+            if ($stmt->execute($query)) {
+                echo 'Berhasil';
+            } else {
+                echo 'gagal';
+            }
+        } catch (PDOException $e) {
+            echo $sql . '<br>' . $e->getMessage();
         }
     }
 
@@ -176,7 +178,8 @@ class Users
         }
     }
 
-    public function checkHaveATeam($id){
+    public function checkHaveATeam($id)
+    {
         $sql = 'SELECT * FROM user_team WHERE user_id=? AND team_id IS NOT NULL';
         $stmt = $this->koneksi->conn->prepare($sql);
         $stmt->execute([$id]);
@@ -184,11 +187,23 @@ class Users
         return $dataUser;
     }
 
-    public function authenticate($username, $password){
+    public function authenticate($username, $password)
+    {
         $sql = 'SELECT * FROM users WHERE username=? AND password=?';
         $stmt = $this->koneksi->conn->prepare($sql);
         $stmt->execute([$username, $password]);
         $dataUser = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $dataUser;
     }
+
+    public function totalUser()
+    {
+        $sql = "SELECT COUNT(*) AS total_user FROM users";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
+   
 }

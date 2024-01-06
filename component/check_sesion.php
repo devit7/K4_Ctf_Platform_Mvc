@@ -5,6 +5,12 @@ if (!isset($_SESSION['id_user'])) {
     header('Location: ../pages/login.php');
 }
 
+if(isset($_SESSION['role'])){
+    if($_SESSION['role']=='admin'){
+        header('Location: ../pages/admin_dashboard.php');
+    }
+}
+
 function session_chall(){
         require_once '../model/users.php';
         $team = new Users();

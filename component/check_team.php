@@ -10,6 +10,11 @@ if (isset($_SESSION['id_user'])) {
         header('Location: ../pages/team_setting.php');
     }
 }
+if(isset($_SESSION['role'])){
+    if($_SESSION['role']=='admin'){
+        header('Location: ../pages/admin_dashboard.php');
+    }
+}
 if (!isset($_SESSION['id_user'])) {
     header('Location: ../pages/login.php');
 }

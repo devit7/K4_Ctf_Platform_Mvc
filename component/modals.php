@@ -1,9 +1,9 @@
 <?php
 function createModal( $title, $message, $type) {
     if ($type == 'success'){
-        $headerImgSrc = 'https://iili.io/JTtzfdx.png';
+        $headerImgSrc = 'https://img-host-by-dev.vercel.app/img/k4ctf/9426997.png';
     }else if ($type == 'failed'){
-        $headerImgSrc = 'https://iili.io/JTtz0Xt.png';
+        $headerImgSrc = 'http://img-host-by-dev.vercel.app/img/k4ctf/6659895.png';
     }
 
 

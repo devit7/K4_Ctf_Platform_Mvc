@@ -103,7 +103,6 @@ class Challs
     }
 
 
-
     public function getSolveByChallId($id_chall)
     {
         $sql = "SELECT solves.*, teams.nama_team FROM solves JOIN teams ON solves.team_id = teams.team_id WHERE solves.chall_id = ? ";
@@ -209,7 +208,22 @@ class Challs
     }
 
 
+    public function totalCategory(){
+        $sql = "SELECT COUNT(*) AS total_category FROM categories";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
 
+
+    public function totalChall(){
+        $sql = "SELECT COUNT(*) AS total_chall FROM chall";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
 
 
 

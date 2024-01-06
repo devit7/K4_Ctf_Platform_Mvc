@@ -178,3 +178,10 @@
 .kotak-2 table tbody tr td a:hover {
     text-decoration: underline;
 }
+
+.mark{
+    background-color: rgb(51, 85, 0);
+    color: rgb(190, 242, 100);
+    border-radius: 99px;
+    padding: 2px
+}

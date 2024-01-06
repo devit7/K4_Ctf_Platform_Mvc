@@ -40,8 +40,12 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                     </svg>
-
-                    <p>20</p>
+                    <?php
+                    require_once '../model/users.php';
+                    $users = new Users();
+                    $totalUser = $users->totalUser();
+                    ?>
+                    <p><?=$totalUser[0]['total_user']?></p>
                 </div>
                 <div class="color-blue"></div>
             </div>
@@ -53,8 +57,12 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                     </svg>
-
-                    <p>20</p>
+                    <?php
+                    require_once '../model/teams.php';
+                    $teams = new Teams();
+                    $totalTeams = $teams->totalTeam();
+                    ?>
+                    <p><?=$totalTeams[0]['total_team']?></p>
                 </div>
                 <div class="color-blue"></div>
             </div>
@@ -66,8 +74,12 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                     </svg>
-
-                    <p>20</p>
+                    <?php
+                    require_once '../model/chall.php';
+                    $chall = new Challs();
+                    $totalChall = $chall->totalChall();
+                    ?>
+                    <p><?=$totalChall[0]['total_chall']?></p>
                 </div>
                 <div class="color-blue"></div>
             </div>
@@ -79,8 +91,10 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                     </svg>
-
-                    <p>20</p>
+                    <?php
+                    $totalCategory = $chall->totalCategory();
+                    ?>
+                    <p><?=$totalCategory[0]['total_category']?></p>
                 </div>
                 <div class="color-blue"></div>
             </div>
@@ -92,7 +106,10 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                     </svg>
-                    <p>20</p>
+                    <?php
+                    $totalSolved = $teams->totalSolve();
+                    ?>
+                    <p><?=$totalSolved[0]['total_solved']?></p>
                 </div>
                 <div class="color-blue"></div>
             </div>
@@ -108,12 +125,20 @@
                             <th>Team Solved</th>
                             <th>Total Chall</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Web</td>
-                            <td>20</td>
-                            <td>20</td>
-                        </tr>
+                        <?php
+                        $dataSolved = $teams->dhAdminSolved();
+                        $no = 1;
+                        foreach ($dataSolved as $solved) :
+                        ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $solved['category_name'] ?></td>
+                                <td><?= $solved['total_team_solved'] ?></td>
+                                <td><?= $solved['total_chall'] ?></td>
+                            </tr>
+                        <?php
+                        endforeach;
+                        ?>
                     </table>
                 </div>
             </div>
@@ -138,15 +163,19 @@
             <div class="top-10">
                 <h3>Top 10</h3>
                 <div class="daftar-solve">
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>1. [ R.A.T.I.O ]</h4>
+                    <?php
+                    $dataTeams = $teams->laderboardAllLimit10();
+                    $no = 1;
+                    foreach ($dataTeams as $team) :
+                    ?>
+                        <div class="solve">
+                            <div class="nama">
+                                <h4><?= $no++ ?>. <?= $team['team_name'] ?> [<?= $team['total_points'] ?>]</h4>
+                            </div>
                         </div>
-                    </div>
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>2. [ MOE ]</h4>
-                        </div>
+                    <?php
+                    endforeach;
+                    ?>
                     </div>
                 </div>
             </div>

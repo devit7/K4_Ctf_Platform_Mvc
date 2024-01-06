@@ -192,6 +192,22 @@ class Teams
             return $e->getMessage();
         }
     }
+    //limit 10
+    public function laderboardAllLimit10()
+    {
+        try {
+            $sql = "SELECT teams.nama_team AS team_name,SUM(chall.point) AS total_points
+        FROM solves JOIN teams ON solves.team_id = teams.team_id JOIN chall ON solves.chall_id = chall.chall_id
+        GROUP BY teams.team_id ORDER BY total_points DESC limit 10;
+        ";
+            $stmt = $this->koneksi->conn->query($sql);
+            $stmt->execute();
+            $dataTeams = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $dataTeams;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 
     //first blood every chall all
     public function firstBloodAll()
@@ -199,12 +215,8 @@ class Teams
         try {
             $sql = "SELECT
                     chall.nama_chall AS challenge_name, teams.nama_team AS team_name,categories.nama_category AS category_name, MIN(solves.date_solve) AS first_blood_time
-                    FROM solves 
-                    JOIN teams ON solves.team_id = teams.team_id
-                    JOIN chall ON solves.chall_id = chall.chall_id
-                    JOIN categories ON chall.category_id = categories.category_id
-                    GROUP BY chall.chall_id
-                    ORDER BY first_blood_time ASC";
+                    FROM solves JOIN teams ON solves.team_id = teams.team_id JOIN chall ON solves.chall_id = chall.chall_id
+                    JOIN categories ON chall.category_id = categories.category_id GROUP BY chall.chall_id ORDER BY first_blood_time ASC";
             $stmt = $this->koneksi->conn->query($sql);
             $stmt->execute();
             $dataTeams = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -250,4 +262,40 @@ class Teams
         $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
         return $dataChall;
     }
+
+    public function totalSolve(){
+        $sql = "SELECT COUNT(*) AS total_solved FROM solves";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
+
+
+    public function totalTeam(){
+        $sql = "SELECT COUNT(*) AS total_team FROM teams";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
+
+    public function dhAdminSolved()
+    {
+        $sql = "SELECT
+        categories.nama_category AS category_name,
+        COUNT(DISTINCT solves.team_id) AS total_team_solved,
+        COUNT(chall.chall_id) AS total_chall FROM categories
+        LEFT JOIN chall ON categories.category_id = chall.category_id
+        LEFT JOIN solves ON chall.chall_id = solves.chall_id
+        GROUP BY categories.nama_category
+        ORDER BY categories.nama_category";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+    
 }
