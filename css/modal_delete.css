@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .main-modal-delete {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .modal-helpe {
+    position: relative;
+    padding: 1rem;
+    width: 100%;
+    max-width: 502px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.judul{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+}
+.desk p{
+    font-size: 1rem;
+    font-weight: normal;
+    text-align: center;
+    padding: 1rem;}
+
+  .gambar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem; 
+    background-color: rgb(31, 41, 55);
+    border-radius: 5px;
+    color: rgb(217, 249, 157);
+  }
+  
+  .gambar img {
+    width: 40%; 
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem; 
+    background-color: rgb(31, 41, 55);
+    border-radius: 5px;
+    color: rgb(217, 249, 157);
+  }
+  
+  .btn-grub {
+    padding: 1rem;
+    width: 100%; 
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .bt-cancel,.bt-delete {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color:rgb(85, 0, 0); 
+    color: rgb(242, 100, 100);
+    border: 1px solid rgb(242, 100, 100);
+  }
+  
+  .bt-delete {
+    color: #fff;
+    background-color: #2648a59f;
+    border: 1px solid #4576ff;
+  }
+
+  

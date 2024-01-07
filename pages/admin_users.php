@@ -42,14 +42,17 @@
                     </a>
                 </div>
                 <div class="bagian-kanan">
-                    <div class="search">
-                        <input type="text" placeholder="Search">
-                        <button type="submit">
+                    <form class="search" action="?search=<?= $search ?>" method="GET"><!-- agar terpampang di url -->
+                        <?php
+                        $search = isset($_GET['search']) ? $_GET['search'] : '';
+                        ?>
+                        <input id="search-input" type="text" name="search" value="<?= $search ?>" placeholder="Search">
+                        <button id="search-btn" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -68,10 +71,16 @@
                         <th>Role</th>
                         <th>Action</th>
                     </tr>
+
                     <?php
                     require_once '../model/users.php';
+
                     $users = new Users();
-                    $dataUser = $users->getAll();
+                    if (isset($_GET['search']) && $_GET['search'] != '') {
+                        $dataUser = $users->searchUser($_GET['search']);
+                    } else {
+                        $dataUser = $users->getAll();
+                    }
                     $no = 1;
                     foreach ($dataUser as $user) :
                     ?>
@@ -88,10 +97,19 @@
                                 <p class="<?= $user['role'] == 'admin' ? 'mark' : '' ?>"><?= $user['role'] ?></p>
                             </td>
                             <td>
-                                <a href="admin_users.php?type=edit&user_id=<?= $user['user_id'] ?>">
+                                <a id="edit-show" href="#" onclick="openEditModal(
+                                    '<?= $user['nama'] ?>',
+                                    '<?= $user['provinsi'] ?>',
+                                    '<?= $user['kampus'] ?>',
+                                    '<?= $user['email'] ?>',
+                                    '<?= $user['username'] ?>',
+                                    '<?= $user['password'] ?>',
+                                    '<?= $user['role'] ?>',
+                                    '<?= $user['user_id'] ?>'
+                                )">
                                     edit
                                 </a>
-                                <a href="">
+                                <a id="delete-show" onclick="openDeleteModal('<?= $user['user_id'] ?>')" href="#">
                                     delete
                                 </a>
                             </td>
@@ -102,24 +120,73 @@
                 </table>
             </div>
         </div>
-            <?php
-            include '../component/modals_form_user.php';
-            modals_add_user('ADD', 'add');
-            ?>
+        <?php
+        include '../component/modals_form_user.php';
+        include '../component/modals_delete.php';
+        ?>
 
     </div>
     <script>
         let id_add = document.getElementById('modal-add-show');
         let id_close = document.getElementById('modal-add-close');
         let id_main = document.getElementById('modal-add-main');
+        let id_edit = document.getElementById('edit-show');
+        let id_modal_delete = document.getElementById('main-modal-delete');
+        let id_close_delete = document.getElementById('close-modal-delete');
+        let id_delete_show = document.getElementById('delete-show');
+
+
+        id_delete_show.addEventListener('click', () => {
+            id_modal_delete.style.display = 'flex';
+        })
+
+        id_close_delete.addEventListener('click', () => {
+            id_modal_delete.style.display = 'none';
+        })
+
 
         id_add.addEventListener('click', () => {
             id_main.style.display = 'flex';
         })
         id_close.addEventListener('click', () => {
             id_main.style.display = 'none';
+            resetFormValues();
+        })
+        id_edit.addEventListener('click', () => {
+            id_main.style.display = 'flex';
         })
 
+        function openDeleteModal(user_id) {
+            id_modal_delete.style.display = 'flex';
+            document.getElementById('form-delete').action = '../controller/controller_delete.php?user_id=' + user_id;
+        }
+
+        function openEditModal(nama, provinsi, kampus, email, username, password, role, id_user) {
+            id_main.style.display = 'flex';
+            document.getElementById('form-register').action = '../controller/controller_edit.php';
+            document.getElementById('modal-title').innerHTML = '/ FORM EDIT USER /';
+            document.getElementById('nama').value = nama;
+            document.getElementById('provinsi').value = provinsi;
+            document.getElementById('kampus').value = kampus;
+            document.getElementById('email').value = email;
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = password;
+            document.getElementById('role').value = role;
+            document.getElementById('id_user').value = id_user;
+        }
+
+        function resetFormValues() {
+            document.getElementById('form-register').action = '../controller/controller_edit.php';
+            document.getElementById('modal-title').innerHTML = '/ FORM ADD USER /';
+            document.getElementById('nama').value = '';
+            document.getElementById('provinsi').value = '';
+            document.getElementById('kampus').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('role').value = '';
+            document.getElementById('id_user').value = '';
+        }
     </script>
 </body>
 

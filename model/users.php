@@ -205,5 +205,12 @@ class Users
         return $dataChall;
     }
 
+    public function searchUser($search)
+    {
+        $sql = "SELECT * FROM users WHERE nama LIKE '%$search%' OR provinsi LIKE '%$search%' OR kampus LIKE '%$search%' OR email LIKE '%$search%' OR username LIKE '%$search%' OR password LIKE '%$search%' OR role LIKE '%$search%'";
+        $stmt = $this->koneksi->conn->query($sql);
+        $dataUser = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $dataUser;
+    }
    
 }
