@@ -180,7 +180,7 @@ class Teams
     public function laderboardAll()
     {
         try {
-            $sql = "SELECT teams.nama_team AS team_name,SUM(chall.point) AS total_points
+            $sql = "SELECT teams.team_id AS team_id,teams.nama_team AS team_name,SUM(chall.point) AS total_points
         FROM solves JOIN teams ON solves.team_id = teams.team_id JOIN chall ON solves.chall_id = chall.chall_id
         GROUP BY teams.team_id ORDER BY total_points DESC;
         ";
@@ -292,6 +292,15 @@ class Teams
         LEFT JOIN solves ON chall.chall_id = solves.chall_id
         GROUP BY categories.nama_category
         ORDER BY categories.nama_category";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
+    public function searchTeam($search)
+    {
+        $sql = "SELECT * FROM teams WHERE nama_team LIKE '%$search%'";
         $query = $this->koneksi->conn->prepare($sql);
         $query->execute();
         $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);

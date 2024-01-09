@@ -48,11 +48,14 @@ include('../component/check_sesion.php');
                         $no = 1;
                         foreach ($dataTeams as $team) :
                         ?>
+                        <a href="?team_id=<?=$team['team_id']?>">
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $team['team_name'] ?></td>
                                 <td><?= $team['total_points'] ?></td>
+                                
                             </tr>
+                        </a>
                         <?php
                         endforeach;
                         ?>
@@ -95,7 +98,6 @@ include('../component/check_sesion.php');
                         <h1>/ Team Stats /</h1>
                     </div>
                     <?php
-                    $id = $_SESSION['id_user'];
                     $datanamateam = $teams->listTeambyIdUser($id);
                     $totalSolved = $teams->totalSolvedByUserId();
                     ?>

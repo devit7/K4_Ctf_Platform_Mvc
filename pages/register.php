@@ -1,5 +1,6 @@
 <?php 
-session_start();
+include('../component/check_sesion.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

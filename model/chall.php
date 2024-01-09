@@ -102,6 +102,14 @@ class Challs
         return $dataChall;
     }
 
+    public function getAlldanCatego()
+    {
+        $sql = "SELECT * FROM chall JOIN categories ON chall.category_id = categories.category_id";
+        $query = $this->koneksi->conn->query($sql);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
 
     public function getSolveByChallId($id_chall)
     {

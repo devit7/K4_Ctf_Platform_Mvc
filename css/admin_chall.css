@@ -1,0 +1,198 @@
+.u-admin{
+    width: 100%;
+    padding: 40px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bagian-1{
+    display: flex;
+    flex-direction: column;
+}
+
+.navigate{
+    display: flex;
+    margin-top: 20px;
+}
+
+.navigate a{
+    text-decoration: none;
+    color: rgba(217, 249, 157, 0.705);
+    margin-right: 20px;
+}
+
+.navigate svg{
+    width: 15px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    background-color: #1e1b4b;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.info svg{
+    width: 15px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.info p{
+    color: rgb(156 163 175 );
+}
+
+.bagian-2 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.kotak-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(31, 41, 55);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 15px 50px;
+    width: 100%;
+}
+
+.bagian-kiri {
+    display: flex;
+    align-items: center;
+}
+
+.tambah {
+    background-color: rgb(51, 85, 0);
+    border: 1px solid rgb(190, 242, 100);
+    border-radius: 2px;
+    cursor: pointer;
+    color: rgb(190, 242, 100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 20px;
+    text-decoration: none;
+}
+
+.tambah svg {
+    width: 20px;
+    color: rgb(190, 242, 100);
+    height: auto;
+    margin-left: 10px;
+}
+
+.bagian-kanan {
+    display: flex;
+    align-items: center;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(31, 41, 55);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.search input {
+    background-color: rgb(31, 41, 55);
+    border: 1px solid rgb(156, 163, 175);
+    color: rgb(156, 163, 175);
+    padding: 7px 20px;
+    border-radius: 3px;
+}
+
+.search button {
+    background-color: rgb(51, 85, 0);
+    border: none;
+    border-radius: 2px;
+    padding: 3px 20px;
+    cursor: pointer;
+    border: 1px solid rgb(190, 242, 100);
+    margin-left: 10px;
+    color: rgb(190, 242, 100);
+}
+
+.search svg {
+    width: 20px;
+    height: auto;
+
+}
+
+.bagian-3{
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.kotak-2{
+    background-color: rgb(31, 41, 55);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    padding: 20px;
+    width: 100%;
+}
+
+.kotak-2 table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.kotak-2 table  tr th {
+    text-align: center;
+    padding: 10px 0;
+    color: rgba(190, 242, 100, 0.712);
+}
+
+.kotak-2 table tbody tr:nth-child(odd) {
+    background-color: rgb(31, 41, 55); /* bg untuk baris ganjil */
+}
+
+.kotak-2 table tbody tr:nth-child(even) {
+    background-color: rgb(41, 51, 65); /* bgg untuk baris genap */
+}
+
+.kotak-2 table tbody tr td {
+    text-align: center;
+    padding: 10px 0;
+    color: rgb(156, 163, 175);
+}
+
+.kotak-2 table tbody tr td a {
+    text-decoration: none;
+    color: rgb(190, 242, 100);
+}
+
+.kotak-2 table tbody tr td a:hover {
+    text-decoration: underline;
+}
+
+.mark{
+    background-color: rgb(51, 85, 0);
+    color: rgb(190, 242, 100);
+    border-radius: 99px;
+    padding: 2px
+}
+.show{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.show svg{
+    width: 15px;
+    height: auto;
+    margin-left: 10px;
+}

@@ -37,7 +37,7 @@ session_start();
                     <a  href="#patner">&nbsp; Our Sponsor &darr;</a>
                 </div>
                 <div class="content-utama-gambar" >
-                    <img  src="https://iili.io/J3IHAMB.png" alt="">
+                    <img  src="http://img-host-by-dev.vercel.app/img/k4ctf/jhvk.png" alt="">
                 </div>
             </div>
         </div>
