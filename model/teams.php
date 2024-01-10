@@ -86,7 +86,7 @@ class Teams
             } else {
                 $sql = "INSERT INTO teams (team_id,nama_team,pass_team,afiliasi,website) VALUES (?,?, ?, ?, ?)";
                 $stmt = $this->koneksi->conn->prepare($sql);
-                $id_teams = time();
+                $id_teams = uniqid();
                 $stmt->execute([$id_teams, $team_name, $team_pass, null, null]);
                 //table user_team insert
                 $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
@@ -101,8 +101,9 @@ class Teams
 
     public function createTeamAdmin(){
         try {
-            $sql1 = "SELECT nama_team FROM teams WHERE nama_team='$this->nama_teams' ";
-            $stmt1 = $this->koneksi->conn->query($sql1);
+            $sql1 = "SELECT nama_team FROM teams WHERE nama_team=? ";
+            $stmt1 = $this->koneksi->conn->prepare($sql1);
+            $stmt1->execute([$this->nama_teams]);
             $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
             if (count($dataNamaTeams) > 0) {
                 $pesan['pesan'] = "Nama Teams Alredy Exists";
@@ -164,15 +165,14 @@ class Teams
 
             // Execute statement
             if ($stmt->execute()) {
-                $pesan['status'] = 'Berhasil';
-                return $pesan;
+                return true;
             } else {
-                $pesan['status'] = 'Gagal';
+                $pesan['pesan'] = 'Gagal';
                 return $pesan;
             }
         } catch (PDOException $e) {
             // Tangani eksepsi jika terjadi kesalahan SQL
-            $pesan['status'] = 'Gagal Terhapus: ' . $e->getMessage();
+            $pesan['pesan'] = 'Gagal Terhapus: ' . $e->getMessage();
             return $pesan;
         }
     }

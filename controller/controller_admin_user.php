@@ -6,7 +6,7 @@ include("../model/users.php");
 // Add data User
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == 'Add') {
         $users = new Users(
-            time(),
+            uniqid(),
             $_POST['nama'],
             $_POST['provinsi'],
             $_POST['kampus'],

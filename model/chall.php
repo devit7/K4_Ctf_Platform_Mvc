@@ -174,7 +174,7 @@ class Challs
         try {
             $sql = "INSERT INTO challs (chall_id, nama_chall, level, deskripsi, attch, category_id, point, flag) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->koneksi->conn->query($sql);
-            $id_chall = time();
+            $id_chall = uniqid();
             $stmt->execute(null, [$id_chall, $this->nama_chall, $this->level, $this->deskripsi, $this->attch, $this->category, $this->point, $this->flag]);
             $dataChall = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $dataChall;

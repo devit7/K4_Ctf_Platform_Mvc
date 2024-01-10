@@ -2,7 +2,7 @@
 include("../model/users.php");
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $users = new Users(time(),$_POST['nama'],$_POST['provinsi'],
+    $users = new Users(uniqid(),$_POST['nama'],$_POST['provinsi'],
     $_POST['kampus'],$_POST['email'],$_POST['username'],$_POST['password']);
     $role = 'user';
     $pesan =$users->createData($role);

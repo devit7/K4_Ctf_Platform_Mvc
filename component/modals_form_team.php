@@ -3,9 +3,9 @@
 <div id="modal-add-main" class="modal-add-user">
         <div class="modal-helper1">
             <div class="main-kontent">
-                <form id="form-register" name="form-register" method="POST" action="../controller/controller_admin_user.php">
+                <form id="form-register" name="form-register" method="POST" action="../controller/controller_admin_team.php">
                     <div  class="judul">
-                        <h1 id="modal-title">/ FORM ADD USER /</h1>
+                        <h1 id="modal-title">/ FORM ADD TEAM /</h1>
                     </div>
                     <br>
                     <hr>

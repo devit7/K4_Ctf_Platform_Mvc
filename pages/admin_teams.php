@@ -98,7 +98,7 @@
                                 )">
                                     edit
                                 </a>
-                                <a id="delete-show" onclick="openDeleteModal('<?= $user['user_id'] ?>')" href="#">
+                                <a id="delete-show" onclick="openDeleteModal('<?= $team['team_id'] ?>')" href="#">
                                     delete
                                 </a>
                             </td>
@@ -160,7 +160,7 @@
 
         function openDeleteModal(user_id) {
             id_modal_delete.style.display = 'flex';
-            document.getElementById('form-delete').action = '../controller/controller_admin_user_delete.php?user_id=' + user_id;
+            document.getElementById('form-delete').action = '../controller/controller_admin_team.php?team_id='+ user_id +'&type=delete';
         }
 
         function openEditModal(id_team, nama_team, pass_team, afiliasi, website) {
