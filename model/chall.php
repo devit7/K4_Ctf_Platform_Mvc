@@ -233,7 +233,13 @@ class Challs
         return $dataChall;
     }
 
-
+    public function searchChall($search){
+        $sql = "SELECT chall.*, categories.nama_category FROM chall JOIN categories ON chall.category_id = categories.category_id WHERE chall.nama_chall LIKE '%$search%' OR chall.level LIKE '%$search%' OR chall.point LIKE '%$search%' OR categories.nama_category LIKE '%$search%' ";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
 
 
 

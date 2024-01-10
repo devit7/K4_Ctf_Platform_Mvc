@@ -73,7 +73,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="challenges">
+                                    <a href="../pages/admin_category.php">
                                         <div>
                                             Category
                                         </div>

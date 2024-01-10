@@ -71,7 +71,6 @@
                         <th>Role</th>
                         <th>Action</th>
                     </tr>
-
                     <?php
                     require_once '../model/users.php';
 

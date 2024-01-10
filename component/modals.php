@@ -6,7 +6,6 @@ function createModal( $title, $message, $type) {
         $headerImgSrc = 'http://img-host-by-dev.vercel.app/img/k4ctf/6659895.png';
     }
 
-
     $modalId = 'modal-join';
     echo '<link rel="stylesheet" href="../css/modals.css">'; // Tambahkan ini untuk menyertakan stylesheet
     echo '<div id="'. $modalId .'" class="main-modal">';
