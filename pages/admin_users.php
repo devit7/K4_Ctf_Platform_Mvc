@@ -120,12 +120,25 @@
             </div>
         </div>
         <?php
-        include '../component/modals_form_user.php';
-        include '../component/modals_delete.php';
+        include_once '../component/modals_form_user.php';
+        include_once '../component/modals_delete.php';
+        include_once '../component/modals.php';
+
+        
+        if (isset($_GET['status'])&&$_GET['status']=='Berhasil') {
+            $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
+            createModal('Process Succes', $pesan, 'success');
+        }else if (isset($_GET['status'])) {
+            $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
+            createModal('Process Failed', $pesan, 'failed');
+        }
+        
         ?>
 
     </div>
+    <script type="text/javascript" src="../js/form_add.js" ></script>
     <script>
+
         let id_add = document.getElementById('modal-add-show');
         let id_close = document.getElementById('modal-add-close');
         let id_main = document.getElementById('modal-add-main');
@@ -157,12 +170,12 @@
 
         function openDeleteModal(user_id) {
             id_modal_delete.style.display = 'flex';
-            document.getElementById('form-delete').action = '../controller/controller_delete.php?user_id=' + user_id;
+            document.getElementById('form-delete').action = '../controller/controller_admin_user_delete.php?user_id=' + user_id;
         }
 
         function openEditModal(nama, provinsi, kampus, email, username, password, role, id_user) {
             id_main.style.display = 'flex';
-            document.getElementById('form-register').action = '../controller/controller_edit.php';
+            document.getElementById('form-register').action = '../controller/controller_admin_user.php?user_id=' + id_user + '&type=edit';
             document.getElementById('modal-title').innerHTML = '/ FORM EDIT USER /';
             document.getElementById('nama').value = nama;
             document.getElementById('provinsi').value = provinsi;
@@ -171,11 +184,10 @@
             document.getElementById('username').value = username;
             document.getElementById('password').value = password;
             document.getElementById('role').value = role;
-            document.getElementById('id_user').value = id_user;
+            document.getElementById('id-submit').value = 'Edit';
         }
-
         function resetFormValues() {
-            document.getElementById('form-register').action = '../controller/controller_edit.php';
+            document.getElementById('form-register').action = '../controller/controller_admin_user.php';
             document.getElementById('modal-title').innerHTML = '/ FORM ADD USER /';
             document.getElementById('nama').value = '';
             document.getElementById('provinsi').value = '';
@@ -185,7 +197,29 @@
             document.getElementById('password').value = '';
             document.getElementById('role').value = '';
             document.getElementById('id_user').value = '';
+            document.getElementById('id-submit').value = 'Add';
         }
+    </script>
+    <!-- //js modal aller -->
+    <script>
+        //get query url
+        let url = new URL(window.location.href);
+        let status = url.searchParams.get('status');
+
+        let close_modal_join = document.getElementById('close-modal-join');
+        let modal_join = document.getElementById('modal-join');
+
+        if (status === 'Username Alredy Exists' || status === 'Email Alredy Exists' || status === 'Berhasil'  || status === 'Gagal') {
+            modal_join.style.display = 'flex';
+        }
+
+        close_modal_join.addEventListener('click', () => {
+            modal_join.style.display = 'none';
+            if (status === 'Username Alredy Exists' || status === 'Email Alredy Exists' || status === 'Berhasil' || status === 'Gagal') {
+                url.searchParams.delete('status');
+                history.replaceState({}, document.title, url.href); //untuk menghilangkan status di url
+            }
+        });
     </script>
 </body>
 

@@ -145,6 +145,39 @@ class Users
         }
     }
 
+    public function updateAdmin($id, $nama, $provinsi, $kampus, $email, $username, $password, $role)
+    {
+        try {
+            $sql1 = "SELECT * FROM users WHERE user_id != '$id'  ";
+            $stmt1 = $this->koneksi->conn->query($sql1);
+            $dataUsername = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($dataUsername as $d) :
+                if ($this->username === $d['username']) {
+                    $pesan['pesan'] = 'Username Alredy Exists';
+                    return $pesan;
+                }
+                if ($this->email === $d['email']) {
+                    $pesan['pesan'] = 'Email Alredy Exists';
+                    return $pesan;
+                }
+            endforeach;
+            
+            $sql = 'UPDATE users SET nama=?, provinsi=?, kampus=?, email=?, username=?, password=?, role=? WHERE user_id= ?';
+            $stmt = $this->koneksi->conn->prepare($sql);
+            $query = [$nama, $provinsi, $kampus, $email, $username, $password, $role, $id];
+            if ($stmt->execute($query)) {
+                $pesan['pesan'] = 'Berhasil';
+                return $pesan;
+            } else {
+                $pesan['pesan'] = 'Gagal';
+                return $pesan;
+            }
+        } catch (PDOException $e) {
+            echo $sql . '<br>' . $e->getMessage();
+        }
+    }
+
     public function updateNewPassword($id_user, $newPassword)
     {
         try {
@@ -164,19 +197,28 @@ class Users
 
     public function deleteByid($id)
     {
-        $sql = 'DELETE FROM users WHEN user_id=:id';
-        $stmt = $this->koneksi->conn->query($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-        // check status
-        if ($stmt->execute()) {
-            $pesan['status'] = 'Berhasil Terhapus';
-            return $pesan;
-        } else {
-            $pesan['status'] = 'gagal terhapus';
+        try {
+            $sql = 'DELETE FROM users WHERE user_id = ?';
+            $stmt = $this->koneksi->conn->prepare($sql);
+    
+            // Bind parameter
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+    
+            // Execute statement
+            if ($stmt->execute()) {
+                $pesan['status'] = 'Berhasil';
+                return $pesan;
+            } else {
+                $pesan['status'] = 'Gagal';
+                return $pesan;
+            }
+        } catch (PDOException $e) {
+            // Tangani eksepsi jika terjadi kesalahan SQL
+            $pesan['status'] = 'Gagal Terhapus: ' . $e->getMessage();
             return $pesan;
         }
     }
+    
 
     public function checkHaveATeam($id)
     {

@@ -241,6 +241,14 @@ class Challs
         return $dataChall;
     }
 
+    public function searchCategory($search){
+        $sql = "SELECT * FROM categories WHERE nama_category LIKE '%$search%' ";
+        $query = $this->koneksi->conn->prepare($sql);
+        $query->execute();
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
+    }
+
 
 
 }

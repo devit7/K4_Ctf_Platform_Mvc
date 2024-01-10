@@ -70,7 +70,11 @@
                     require_once '../model/chall.php';
 
                     $challs = new Challs();
-                    $dataChall = $challs->getAllCategory();
+                    if (isset($_GET['search']) && $_GET['search'] != '') {
+                        $dataChall = $challs->searchCategory($_GET['search']);
+                    } else {
+                        $dataChall = $challs->getAllCategory();
+                    }
                     $no = 1;
                     foreach ($dataChall as $chall) :
                     ?>
@@ -86,7 +90,7 @@
                                     delete
                                 </a>
                             </td>
-                            
+
                         </tr>
                     <?php
                     endforeach;

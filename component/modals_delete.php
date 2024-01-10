@@ -16,7 +16,7 @@
                     <button type="button" class="bt-cancel" id="close-modal-delete">Cancel</button>
                 </div>
                 <div class="delete">
-                    <form id="form-delete" action="">
+                    <form id="form-delete" method="POST" action="">
                         <button type="submit" class="bt-delete">Delete</button>
                     </form>
                 </div>

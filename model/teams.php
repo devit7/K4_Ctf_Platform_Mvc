@@ -90,10 +90,53 @@ class Teams
                 $stmt->execute([$id_teams, $team_name, $team_pass, null, null]);
                 //table user_team insert
                 $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
-                $stmt2 = $this->koneksi->conn->prepare($sql2);
+                 $stmt2 = $this->koneksi->conn->prepare($sql2);
                 $stmt2->execute([$id_user, $id_teams, 'lead']);
                 return $id_teams;
             }
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function createTeamAdmin(){
+        try {
+            $sql1 = "SELECT nama_team FROM teams WHERE nama_team='$this->nama_teams' ";
+            $stmt1 = $this->koneksi->conn->query($sql1);
+            $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+            if (count($dataNamaTeams) > 0) {
+                $pesan['pesan'] = "Nama Teams Alredy Exists";
+                return $pesan;
+            } else {
+                $sql = "INSERT INTO teams (team_id,nama_team,pass_team,afiliasi,website) VALUES (?,?, ?, ?, ?)";
+                $stmt = $this->koneksi->conn->prepare($sql);
+                $stmt->execute([$this->id_teams, $this->nama_teams, $this->pass_teams, $this->afiliasi, $this->website]);
+                
+                return true;
+            }
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function updateAdmin($id_teams, $nama_teams, $afiliasi, $website)
+    {
+        try {
+            $sql1 = "SELECT * FROM teams WHERE team_id!='$id_teams'";
+            $stmt1 = $this->koneksi->conn->query($sql1);
+            $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($dataNamaTeams as $d) :
+                if ($nama_teams === $d['nama_team']) {
+                    $pesan['pesan'] = 'Nama Teams Alredy Exists';
+                    return $pesan;
+                }
+            endforeach;
+
+            $sql = "UPDATE teams SET nama_team=?,afiliasi=?,website=? WHERE team_id=?";
+            $stmt = $this->koneksi->conn->prepare($sql);
+            $stmt->execute([$nama_teams, $afiliasi, $website, $id_teams]);
+            return $stmt->rowCount();
         } catch (PDOException $e) {
             return $e->getMessage();
         }
@@ -108,6 +151,29 @@ class Teams
             return $stmt->rowCount();
         } catch (PDOException $e) {
             return $e->getMessage();
+        }
+    }
+    public function deleteByid($id)
+    {
+        try {
+            $sql = 'DELETE FROM teams WHERE team_id = ?';
+            $stmt = $this->koneksi->conn->prepare($sql);
+
+            // Bind parameter
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+
+            // Execute statement
+            if ($stmt->execute()) {
+                $pesan['status'] = 'Berhasil';
+                return $pesan;
+            } else {
+                $pesan['status'] = 'Gagal';
+                return $pesan;
+            }
+        } catch (PDOException $e) {
+            // Tangani eksepsi jika terjadi kesalahan SQL
+            $pesan['status'] = 'Gagal Terhapus: ' . $e->getMessage();
+            return $pesan;
         }
     }
 
@@ -136,11 +202,25 @@ class Teams
             $sql1 = "SELECT * FROM teams WHERE nama_team='$team_name' AND pass_team='$team_pass'";
             $stmt1 = $this->koneksi->conn->query($sql1);
             $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+            //jika ditemukan tapi tidak ada anggota maka yang join pertama adalah leader
+            
+            //jika ditemukan dan sudah ada anggota 
             if (count($dataNamaTeams) > 0) {
-                $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
-                $stmt2 = $this->koneksi->conn->prepare($sql2);
-                $stmt2->execute([$id_user, $dataNamaTeams[0]['team_id'], 'member']);
-                return $dataNamaTeams[0]['team_id'];
+                $sql3= "SELECT * FROM user_team WHERE team_id = ? ";
+                $stmt3 = $this->koneksi->conn->prepare($sql3);
+                $stmt3->execute([$dataNamaTeams[0]['team_id']]);
+                $dataUserTeam = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+                if(count($dataUserTeam)>0){
+                    $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
+                    $stmt2 = $this->koneksi->conn->prepare($sql2);
+                    $stmt2->execute([$id_user, $dataNamaTeams[0]['team_id'], 'lead']);
+                    return $dataNamaTeams[0]['team_id'];
+                }else{
+                    $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
+                    $stmt2 = $this->koneksi->conn->prepare($sql2);
+                    $stmt2->execute([$id_user, $dataNamaTeams[0]['team_id'], 'member']);
+                    return $dataNamaTeams[0]['team_id'];
+                }
             } else {
                 $pesan['pesan'] = "Nama Teams atau Password salah";
                 return $pesan;
@@ -232,21 +312,11 @@ class Teams
         users.nama AS nama_user,
         chall.nama_chall AS Challname,
         categories.nama_category AS Category,
-        solves.date_solve AS Time
-    FROM
-        solves
-    JOIN
-        teams ON solves.team_id = teams.team_id
-    JOIN
-        chall ON solves.chall_id = chall.chall_id
-    JOIN
-        categories ON chall.category_id = categories.category_id
-    JOIN
-        users ON solves.user_id = users.user_id
-    WHERE
-        solves.user_id = ?
-    ORDER BY
-        solves.date_solve ASC;
+        solves.date_solve AS Time FROM solves JOIN teams ON solves.team_id = teams.team_id
+        JOIN chall ON solves.chall_id = chall.chall_id
+        JOIN categories ON chall.category_id = categories.category_id
+        JOIN users ON solves.user_id = users.user_id
+        WHERE solves.user_id = ? ORDER BY solves.date_solve ASC;
     ";
         $query = $this->koneksi->conn->prepare($sql);
         $query->execute([$_SESSION['id_user']]);
@@ -263,7 +333,8 @@ class Teams
         return $dataChall;
     }
 
-    public function totalSolve(){
+    public function totalSolve()
+    {
         $sql = "SELECT COUNT(*) AS total_solved FROM solves";
         $query = $this->koneksi->conn->prepare($sql);
         $query->execute();
@@ -273,7 +344,8 @@ class Teams
 
 
 
-    public function totalTeam(){
+    public function totalTeam()
+    {
         $sql = "SELECT COUNT(*) AS total_team FROM teams";
         $query = $this->koneksi->conn->prepare($sql);
         $query->execute();
@@ -306,5 +378,4 @@ class Teams
         $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
         return $dataChall;
     }
-    
 }
