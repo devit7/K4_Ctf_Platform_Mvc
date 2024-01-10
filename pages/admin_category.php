@@ -1,3 +1,6 @@
+<?php
+    include_once '../component/admin_session.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,10 +86,13 @@
                             <td><?= $chall['category_id'] ?></td>
                             <td><?= $chall['nama_category'] ?></td>
                             <td>
-                                <a id="edit-show" href="#">
+                                <a id="edit-show" href="#"onclick="openEditModal(
+                                    '<?= $chall['category_id'] ?>',
+                                    '<?= $chall['nama_category'] ?>'
+                                )">
                                     edit
                                 </a>
-                                <a id="delete-show" onclick="openDeleteModal('<?= $user['user_id'] ?>')" href="#">
+                                <a id="delete-show" onclick="openDeleteModal('<?= $chall['category_id'] ?>')" href="#">
                                     delete
                                 </a>
                             </td>
@@ -98,11 +104,94 @@
                 </table>
             </div>
         </div>
+        <?php
+        include_once '../component/modals_form_category.php';
+        include_once '../component/modals_delete.php';
+        include_once '../component/modals.php';
 
+        
+        if (isset($_GET['status'])&&$_GET['status']=='Berhasil') {
+            $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
+            createModal('Process Succes', $pesan, 'success');
+        }else if (isset($_GET['status'])) {
+            $pesan = htmlspecialchars($_GET['status'],ENT_QUOTES,'UTF-8');// sanitized input wkwkw
+            createModal('Process Failed', $pesan, 'failed');
+        }
+        
+        ?>
 
     </div>
+    <script type="text/javascript" src="../js/form_add.js" ></script>
     <script>
 
+        let id_add = document.getElementById('modal-add-show');
+        let id_close = document.getElementById('modal-add-close');
+        let id_main = document.getElementById('modal-add-main');
+        let id_edit = document.getElementById('edit-show');
+        let id_modal_delete = document.getElementById('main-modal-delete');
+        let id_close_delete = document.getElementById('close-modal-delete');
+        let id_delete_show = document.getElementById('delete-show');
+
+
+        id_delete_show.addEventListener('click', () => {
+            id_modal_delete.style.display = 'flex';
+        })
+
+        id_close_delete.addEventListener('click', () => {
+            id_modal_delete.style.display = 'none';
+        })
+
+
+        id_add.addEventListener('click', () => {
+            id_main.style.display = 'flex';
+        })
+        id_close.addEventListener('click', () => {
+            id_main.style.display = 'none';
+            resetFormValues();
+        })
+        id_edit.addEventListener('click', () => {
+            id_main.style.display = 'flex';
+        })
+
+        function openDeleteModal(user_id) {
+            id_modal_delete.style.display = 'flex';
+            document.getElementById('form-delete').action = '../controller/controller_admin_category.php?category_id='+ user_id +'&type=delete';
+        }
+
+        function openEditModal(id_team,nama_category) {
+            id_main.style.display = 'flex';
+            document.getElementById('form-register').action = '../controller/controller_admin_category.php?category_id=' + id_team + '&type=edit';
+            document.getElementById('modal-title').innerHTML = '/ FORM EDIT CATEGORY /';
+            document.getElementById('nama_category').value = nama_category;
+            document.getElementById('id-submit').value = 'Edit';
+        }
+        function resetFormValues() {
+            document.getElementById('form-register').action = '../controller/controller_admin_category.php';
+            document.getElementById('modal-title').innerHTML = '/ FORM ADD CATEGORY /';
+            document.getElementById('nama_category').value = '';
+            document.getElementById('id-submit').value = 'Add';
+        }
+    </script>
+    <!-- //js modal aller -->
+    <script>
+        //get query url
+        let url = new URL(window.location.href);
+        let status = url.searchParams.get('status');
+
+        let close_modal_join = document.getElementById('close-modal-join');
+        let modal_join = document.getElementById('modal-join');
+
+        if (status === 'Nama Teams Alredy Exists' ||  status === 'Berhasil'  || status === 'Gagal') {
+            modal_join.style.display = 'flex';
+        }
+
+        close_modal_join.addEventListener('click', () => {
+            modal_join.style.display = 'none';
+            if (status === 'Nama Teams Alredy Exists' ||  status === 'Berhasil' || status === 'Gagal') {
+                url.searchParams.delete('status');
+                history.replaceState({}, document.title, url.href); //untuk menghilangkan status di url
+            }
+        });
     </script>
 </body>
 

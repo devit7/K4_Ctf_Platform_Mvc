@@ -172,16 +172,70 @@ class Challs
     public function createNewChall()
     {
         try {
-            $sql = "INSERT INTO challs (chall_id, nama_chall, level, deskripsi, attch, category_id, point, flag) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $this->koneksi->conn->query($sql);
+            //check nama chall sudah ada
+            $sql1 = "SELECT * FROM chall WHERE nama_chall = ?";
+            $query = $this->koneksi->conn->prepare($sql1);
+            $query->execute([$this->nama_chall]);
+            $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+            if(count($dataChall) > 0){
+                return false;
+            }
+            $sql = "INSERT INTO chall (chall_id, nama_chall, level, description, attch,  point, flag,category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->koneksi->conn->prepare($sql);
             $id_chall = uniqid();
-            $stmt->execute(null, [$id_chall, $this->nama_chall, $this->level, $this->deskripsi, $this->attch, $this->category, $this->point, $this->flag]);
-            $dataChall = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $dataChall;
+           /*  echo $this->nama_chall.$this->level.$this->deskripsi.$this->attch.$this->point.$this->flag.$this->category;
+            die(); */
+            $stmt->execute([$id_chall, $this->nama_chall, $this->level, $this->deskripsi, $this->attch,  $this->point, $this->flag, $this->category]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+        }
+    }
+
+    public function updateChallenge($id)
+    {
+        try {
+            //check nama chall sudah ada
+            $sql1 = "SELECT * FROM chall WHERE chall_id != ?";
+            $query = $this->koneksi->conn->prepare($sql1);
+            $query->execute([$id]);
+            $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($dataChall as $d) :
+                if ($this->nama_chall === $d['nama_chall']) {
+                    return false;
+                }
+            endforeach;
+
+            $sql = "UPDATE chall SET nama_chall = ?, level = ?, description = ?, attch = ?, category_id = ?, point = ?, flag = ? WHERE chall_id = ?";
+            $stmt = $this->koneksi->conn->prepare($sql);
+            $stmt->execute([$this->nama_chall, $this->level, $this->deskripsi, $this->attch, $this->category, $this->point, $this->flag, $id]);
+            return true;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
+
+    public function deleteChallByid($id)
+    {
+        try {
+            $sql = 'DELETE FROM challs WHERE chall_id = ?';
+            $stmt = $this->koneksi->conn->prepare($sql);
+    
+            // Execute statement
+            if ($stmt->execute([$id])) {
+                return true;
+            } else {
+                $pesan['pesan'] = 'Gagal';
+                return $pesan;
+            }
+        } catch (PDOException $e) {
+            // Tangani eksepsi jika terjadi kesalahan SQL
+            $pesan['pesan'] = 'Gagal Terhapus: ' . $e->getMessage();
+            return $pesan;
+        }
+    }
+
 
     public function checkFlag($flag, $id_chall,$id_team)
     {
@@ -247,6 +301,67 @@ class Challs
         $query->execute();
         $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
         return $dataChall;
+    }
+
+//ADMIN CATEGORY
+    public function createCategory($nama_category){
+        try 
+        {
+            //check jika nama category sudah ada
+            $sql = "SELECT * FROM categories WHERE nama_category = ?";
+            $query = $this->koneksi->conn->prepare($sql);
+            $query->execute([$nama_category]);
+            $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+            if(count($dataChall) > 0){
+                return false;
+            }
+            $sql = "INSERT INTO categories (category_id, nama_category) VALUES (?, ?)";
+            $stmt = $this->koneksi->conn->prepare($sql);
+            $id_category = uniqid();
+            $stmt->execute([$id_category, $nama_category]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function deleteCategoryByid($id)
+    {
+        try {
+            $sql = 'DELETE FROM categories WHERE category_id = ?';
+            $stmt = $this->koneksi->conn->prepare($sql);
+    
+            // Execute statement
+            if ($stmt->execute([$id])) {
+                return true;
+            } else {
+                $pesan['pesan'] = 'Gagal';
+                return $pesan;
+            }
+        } catch (PDOException $e) {
+            // Tangani eksepsi jika terjadi kesalahan SQL
+            $pesan['pesan'] = 'Gagal Terhapus: ' . $e->getMessage();
+            return $pesan;
+        }
+    }
+
+    public function updateCategory($id,$nama_category){
+        try {
+            $sql = 'UPDATE categories SET nama_category = ? WHERE category_id = ?';
+            $stmt = $this->koneksi->conn->prepare($sql);
+    
+            // Execute statement
+            if ($stmt->execute([$nama_category,$id])) {
+                return true;
+            } else {
+                $pesan['pesan'] = 'Gagal';
+                return $pesan;
+            }
+        } catch (PDOException $e) {
+            // Tangani eksepsi jika terjadi kesalahan SQL
+            $pesan['pesan'] = 'Gagal Terupdate: ' . $e->getMessage();
+            return $pesan;
+        }
     }
 
 

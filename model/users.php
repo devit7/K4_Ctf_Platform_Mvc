@@ -148,8 +148,9 @@ class Users
     public function updateAdmin($id, $nama, $provinsi, $kampus, $email, $username, $password, $role)
     {
         try {
-            $sql1 = "SELECT * FROM users WHERE user_id != '$id'  ";
-            $stmt1 = $this->koneksi->conn->query($sql1);
+            $sql1 = "SELECT * FROM users WHERE user_id != ?  ";
+            $stmt1 = $this->koneksi->conn->prepare($sql1);
+            $stmt1->execute([$id]);
             $dataUsername = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($dataUsername as $d) :

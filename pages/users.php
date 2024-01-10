@@ -3,6 +3,7 @@ include('../component/check_sesion.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +12,13 @@ include('../component/check_sesion.php');
     <link rel="stylesheet" href="../css/users.css">
     <link rel="stylesheet" href="../css/font.css">
 </head>
+
 <body>
     <div class="">
         <!-- Navbar -->
         <?php
-    include '../component/navbar.php';
-    ?>
+        include '../component/navbar.php';
+        ?>
     </div>
     <!-- Content -->
     <div class="container-users">
@@ -27,10 +29,13 @@ include('../component/check_sesion.php');
         </div>
         <!-- Main -->
         <div class="kotak-utama">
-            <div class="search-users">
-                <input type="text">
+            <form class="search-users">
+                <?php
+                $search = isset($_GET['search']) ? $_GET['search'] : '';
+                ?>
+                <input type="text" name="search" value="<?= $search ?>">
                 <button>SEARCH</button>
-            </div>
+            </form>
             <div class="table-users">
                 <table>
                     <tr>
@@ -41,14 +46,18 @@ include('../component/check_sesion.php');
                     <?php
                     require_once '../model/users.php';
                     $users = new Users();
-                    $dataUser=$users->getAll();
-                    foreach ($dataUser as $user):
+                    if (isset($_GET['search']) && $_GET['search'] != '') {
+                        $dataUser = $users->searchUser($_GET['search']);
+                    } else {
+                        $dataUser = $users->getAll();
+                    }
+                    foreach ($dataUser as $user) :
                     ?>
-                    <tr>
-                        <td><?=$user['nama']?></td>
-                        <td><?=$user['kampus']?></td>
-                        <td><?=$user['provinsi']?></td>
-                    </tr>
+                        <tr>
+                            <td><?= $user['nama'] ?></td>
+                            <td><?= $user['kampus'] ?></td>
+                            <td><?= $user['provinsi'] ?></td>
+                        </tr>
                     <?php
                     endforeach;
                     ?>
@@ -60,11 +69,12 @@ include('../component/check_sesion.php');
         </div>
     </div>
     <script>
-            let idpindah=document.getElementById('link-myteam');
-    
-            idpindah.addEventListener('click',()=>{
-                window.location.href='./team_register.php'
-            })
-        </script>
+        let idpindah = document.getElementById('link-myteam');
+
+        idpindah.addEventListener('click', () => {
+            window.location.href = './team_register.php'
+        })
+    </script>
 </body>
+
 </html>

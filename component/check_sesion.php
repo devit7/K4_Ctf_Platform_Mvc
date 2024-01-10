@@ -2,13 +2,15 @@
 
 session_start();
 if (isset($_SESSION['id_user'])) {
-    header('Location: ../pages/login.php');
-}
-
-if(isset($_SESSION['role'])){
-    if($_SESSION['role']=='admin'){
-        header('Location: ../pages/admin_dashboard.php');
+    include_once '../model/users.php';
+    $user = new Users();
+    $user_id=$user->getByid($_SESSION['id_user']);
+    $user_id=$user_id[0]['role'];
+    if($user_id!='user'){
+        header('Location: ../pages/login.php');
     }
+}else{
+    header('Location: ../pages/login.php');
 }
 
 function session_chall(){

@@ -1,3 +1,6 @@
+<?php
+    include_once '../component/admin_session.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 

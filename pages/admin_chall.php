@@ -1,3 +1,6 @@
+<?php
+    include_once '../component/admin_session.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,15 +98,33 @@
                             <td><?= $chall['flag'] ?></td>
                             <td><?= $chall['nama_category'] ?></td>
                             <td>
-                                <a id="edit-show" href="#">
+                                <a id="edit-show" href="#" onclick="openEditModal(
+                                    '<?= $chall['chall_id'] ?>',
+                                    '<?= $chall['nama_chall'] ?>',
+                                    '<?= $chall['level'] ?>',
+                                    '<?= $chall['description'] ?>',
+                                    '<?= $chall['attch'] ?>',
+                                    '<?= $chall['point'] ?>',
+                                    '<?= $chall['flag'] ?>',
+                                    '<?= $chall['category_id'] ?>'
+                                )">
                                     edit
                                 </a>
-                                <a id="delete-show" onclick="openDeleteModal('<?= $user['user_id'] ?>')" href="#">
+                                <a id="delete-show" onclick="openDeleteModal('<?= $chall['chall_id'] ?>')" href="#">
                                     delete
                                 </a>
                             </td>
                             <td>
-                                <a id="edit-show" class="show" href="#">
+                                <a id="edit-show" class="show" href="#" onclick="openEditModal(
+                                    '<?= $chall['chall_id'] ?>',
+                                    '<?= $chall['nama_chall'] ?>',
+                                    '<?= $chall['level'] ?>',
+                                    '<?= $chall['description'] ?>',
+                                    '<?= $chall['attch'] ?>',
+                                    '<?= $chall['point'] ?>',
+                                    '<?= $chall['flag'] ?>',
+                                    '<?= $chall['category_id'] ?>'
+                                )">
                                     show
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -120,10 +141,107 @@
             </div>
         </div>
 
+        <?php
+        include_once '../component/modals_form_chall.php';
+        include_once '../component/modals_delete.php';
+        include_once '../component/modals.php';
+
+
+        if (isset($_GET['status']) && $_GET['status'] == 'Berhasil') {
+            $pesan = htmlspecialchars($_GET['status'], ENT_QUOTES, 'UTF-8'); // sanitized input wkwkw
+            createModal('Process Succes', $pesan, 'success');
+        } else if (isset($_GET['status'])) {
+            $pesan = htmlspecialchars($_GET['status'], ENT_QUOTES, 'UTF-8'); // sanitized input wkwkw
+            createModal('Process Failed', $pesan, 'failed');
+        }
+
+        ?>
 
     </div>
-    <script>
+    <script type="text/javascript" src="../js/form_add.js" ></script>
 
+    <script>
+        let id_add = document.getElementById('modal-add-show');
+        let id_close = document.getElementById('modal-add-close');
+        let id_main = document.getElementById('modal-add-main');
+        let id_edit = document.getElementById('edit-show');
+        let id_modal_delete = document.getElementById('main-modal-delete');
+        let id_close_delete = document.getElementById('close-modal-delete');
+        let id_delete_show = document.getElementById('delete-show');
+
+
+        id_delete_show.addEventListener('click', () => {
+            id_modal_delete.style.display = 'flex';
+        })
+
+        id_close_delete.addEventListener('click', () => {
+            id_modal_delete.style.display = 'none';
+        })
+
+
+        id_add.addEventListener('click', () => {
+            id_main.style.display = 'flex';
+        })
+        id_close.addEventListener('click', () => {
+            id_main.style.display = 'none';
+            resetFormValues();
+        })
+        id_edit.addEventListener('click', () => {
+            id_main.style.display = 'flex';
+        })
+
+        function openDeleteModal(user_id) {
+            id_modal_delete.style.display = 'flex';
+            document.getElementById('form-delete').action = '../controller/controller_admin_chall.php?chall_id=' + user_id;
+        }
+
+        function openEditModal(chall_id, nama_chall, level, description, attch, point, flag, category_id) {
+            id_main.style.display = 'flex';
+            document.getElementById('form-register').action = '../controller/controller_admin_chall.php?chall_id=' + chall_id + '&type=edit';
+            document.getElementById('modal-title').innerHTML = '/ FORM EDIT CHALL /';
+            document.getElementById('nama_chall').value = nama_chall;
+            document.getElementById('level').value = level;
+            document.getElementById('deskripsi').value = description;
+            document.getElementById('attch').value = attch;
+            document.getElementById('point').value = point;
+            document.getElementById('flag').value = flag;
+            document.getElementById('category_id').value = category_id;
+            document.getElementById('id-submit').value = 'Edit';
+        }
+
+        function resetFormValues() {
+            document.getElementById('form-register').action = '../controller/controller_admin_user.php';
+            document.getElementById('modal-title').innerHTML = '/ FORM ADD CHALL /';
+            document.getElementById('nama_chall').value = '';
+            document.getElementById('level').value = '';
+            document.getElementById('deskripsi').value = '';
+            document.getElementById('attch').value = '';
+            document.getElementById('point').value = '';
+            document.getElementById('flag').value = '';
+            document.getElementById('category_id').value = '';
+            document.getElementById('id-submit').value = 'Add';
+        }
+    </script>
+    <!-- //js modal aller -->
+    <script>
+        //get query url
+        let url = new URL(window.location.href);
+        let status = url.searchParams.get('status');
+
+        let close_modal_join = document.getElementById('close-modal-join');
+        let modal_join = document.getElementById('modal-join');
+
+        if (status === 'Username Alredy Exists' || status === 'Email Alredy Exists' || status === 'Berhasil' || status === 'Gagal') {
+            modal_join.style.display = 'flex';
+        }
+
+        close_modal_join.addEventListener('click', () => {
+            modal_join.style.display = 'none';
+            if (status === 'Username Alredy Exists' || status === 'Email Alredy Exists' || status === 'Berhasil' || status === 'Gagal') {
+                url.searchParams.delete('status');
+                history.replaceState({}, document.title, url.href); //untuk menghilangkan status di url
+            }
+        });
     </script>
 </body>
 

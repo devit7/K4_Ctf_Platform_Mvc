@@ -77,8 +77,9 @@ class Teams
     public function createNewTeam($team_name, $team_pass, $id_user)
     {
         try {
-            $sql1 = "SELECT nama_team FROM teams WHERE nama_team='$team_name' ";
-            $stmt1 = $this->koneksi->conn->query($sql1);
+            $sql1 = "SELECT nama_team FROM teams WHERE nama_team=? ";
+            $stmt1 = $this->koneksi->conn->prepare($sql1);
+            $stmt1->execute([$team_name]);
             $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
             if (count($dataNamaTeams) > 0) {
                 $pesan['pesan'] = "Nama Teams sudah terdaftar";
@@ -123,8 +124,9 @@ class Teams
     public function updateAdmin($id_teams, $nama_teams, $afiliasi, $website)
     {
         try {
-            $sql1 = "SELECT * FROM teams WHERE team_id!='$id_teams'";
-            $stmt1 = $this->koneksi->conn->query($sql1);
+            $sql1 = "SELECT * FROM teams WHERE team_id!=?";
+            $stmt1 = $this->koneksi->conn->prepare($sql1);
+            $stmt1->execute([$id_teams]);
             $dataNamaTeams = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($dataNamaTeams as $d) :
@@ -378,4 +380,6 @@ class Teams
         $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
         return $dataChall;
     }
+
+    
 }

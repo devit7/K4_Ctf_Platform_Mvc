@@ -1,6 +1,6 @@
 
 
-<div id="modal-add-main" class="modal-add-user">
+    <div id="modal-add-main" class="modal-add-user">
         <div class="modal-helper1">
             <div class="main-kontent">
                 <form id="form-register" name="form-register" method="POST" action="../controller/controller_admin_team.php">

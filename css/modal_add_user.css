@@ -65,7 +65,7 @@
     margin-bottom: 5px;
     }
 
-    .kotak-kanan input,.kotak-kanan select, .kotak-kiri input ,.kotak-kiri select{
+    .kotak-kanan input,.kotak-kanan select,.kotak-kiri textarea, .kotak-kiri input ,.kotak-kiri select{
      width: 100%;
      padding: 7px;
     margin-bottom: 10px;
