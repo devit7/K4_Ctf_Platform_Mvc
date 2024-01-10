@@ -212,7 +212,7 @@ class Teams
                 $stmt3 = $this->koneksi->conn->prepare($sql3);
                 $stmt3->execute([$dataNamaTeams[0]['team_id']]);
                 $dataUserTeam = $stmt3->fetchAll(PDO::FETCH_ASSOC);
-                if(count($dataUserTeam)>0){
+                if(count($dataUserTeam)<=0){
                     $sql2 = "INSERT INTO user_team (user_id,team_id,role) VALUES (?,?,?)";
                     $stmt2 = $this->koneksi->conn->prepare($sql2);
                     $stmt2->execute([$id_user, $dataNamaTeams[0]['team_id'], 'lead']);
