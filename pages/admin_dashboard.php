@@ -149,17 +149,26 @@
             <div class="new-solve">
                 <h3>New Solve</h3>
                 <div class="daftar-solve">
-                    <div class="solve">
-                        <div class="nama">
-                            <h4>Team : </h4>
+                    <?php
+                    include_once '../model/chall.php';
+                    $chall = new Challs();
+                    $dataChall = $chall->dhMiddle();
+                    foreach ($dataChall as $chall) :
+                    ?>
+                        <div class="solve">
+                            <div class="nama">
+                                <h4><?= $chall['date_solve'] ?></h4>
+                            </div>
+                            <div class="soal">
+                                <h4><?= $chall['nama_team'] ?></h4>
+                            </div>
+                            <div class="waktu">
+                                <h4><?= $chall['nama_chall'] ?></h4>
+                            </div>
                         </div>
-                        <div class="soal">
-                            <h4>Chall : </h4>
-                        </div>
-                        <div class="waktu">
-                            <h4></h4>
-                        </div>
-                    </div>
+                    <?php
+                    endforeach;
+                    ?>
                 </div>
             </div>
 

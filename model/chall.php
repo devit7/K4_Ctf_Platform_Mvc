@@ -364,6 +364,15 @@ class Challs
         }
     }
 
+    public function dhMiddle(){
+        $sql= "SELECT t.nama_team, c.nama_chall, s.date_solve
+        FROM solves s
+        JOIN teams t ON s.team_id = t.team_id
+        JOIN chall c ON s.chall_id = c.chall_id ORDER BY s.date_solve DESC LIMIT 5";
+        $query = $this->koneksi->conn->query($sql);
+        $dataChall = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $dataChall;
 
+    }
 
 }

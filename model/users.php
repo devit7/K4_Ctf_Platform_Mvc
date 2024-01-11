@@ -255,5 +255,7 @@ class Users
         $dataUser = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $dataUser;
     }
+
+    
    
 }
